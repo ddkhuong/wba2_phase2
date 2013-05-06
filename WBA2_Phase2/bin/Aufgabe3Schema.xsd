@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <xs:element name="rezept">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element name="titel" type="xs:string"/>
+    <xs:element name="bild">
+     <xs:complexType>
+      <xs:simpleContent>
+       <xs:extension base="xs:string">
+        <xs:attribute type="xs:anyURI" name="url"/>
+       </xs:extension>
+      </xs:simpleContent>
+     </xs:complexType>
+    </xs:element>
+    <xs:element name="zutaten">
+     <xs:complexType>
+      <xs:sequence>
+       <xs:element name="zutat" maxOccurs="unbounded" minOccurs="1">
+        <xs:complexType>
+          <xs:attribute name="menge" type="xs:float" use="required"/>
+          <xs:attribute name="einheit" type="xs:string" use="optional"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+       </xs:element> 
+      </xs:sequence>
+       
+      </xs:complexType>
+     </xs:element>
+    <xs:element name="portionen">
+     <xs:complexType>
+       <xs:attribute name="anzahl" type="xs:float" use="required"/>
+    </xs:complexType>
+   </xs:element>
+    <xs:element name="zubereitung">
+     <xs:complexType>
+      <xs:sequence>
+       <xs:element name="arbeitszeit" type="xs:string"/>
+       <xs:element name="schwierigkeitsgrad" type="xs:string"/>
+       <xs:element name="brennwert" type="xs:string"/>
+       <xs:element name="beschreibung" type="xs:string"/>
+      </xs:sequence>
+     </xs:complexType>
+    </xs:element>
+    <xs:element name="kommentare">
+     <xs:complexType>
+      <xs:sequence>
+       <xs:element name="kommentar" maxOccurs="unbounded" minOccurs="0">
+        <xs:complexType>
+         <xs:simpleContent>
+          <xs:extension base="xs:string">
+           <xs:attribute name="id" type="xs:ID"/>
+           <xs:attribute name="autor" type="xs:string"/>
+           <xs:attribute name="datum" type="xs:date"/>
+           <xs:attribute name="zeit" type="xs:time"/>
+          </xs:extension>
+         </xs:simpleContent> 
+        </xs:complexType>
+       </xs:element>
+      </xs:sequence>
+     </xs:complexType>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType> 
+ </xs:element>
+
+</xs:schema>

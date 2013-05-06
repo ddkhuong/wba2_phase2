@@ -1,0 +1,60 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="serie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="name"/>
+        <xs:element type="xs:string" name="genre"/>
+        <xs:element type="xs:string" name="beschreibung"/>
+        <xs:element name="alleStaffeln">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="staffel" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="episode" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType mixed="true">
+                        <xs:sequence>
+                          <xs:element type="xs:float" name="nummer"/>
+                          <xs:element type="xs:string" name="name"/>
+                          <xs:element type="xs:string" name="datum"/>
+                          <xs:element type="xs:string" name="episodenbeschreibung"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="id" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cast">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="darsteller" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="bild">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="url" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element type="xs:string" name="beschreibung"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:byte" name="id"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
