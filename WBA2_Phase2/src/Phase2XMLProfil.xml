@@ -44,7 +44,7 @@
 				<genre>comedy</genre>
 			</filter>
 			<filter id="5">
-				<genre welche="all">thriller</genre>
+				<genre welcheanzeigen="all">thriller</genre>
 			</filter>
 			<filter id="6">
 				<serie>xy</serie>
@@ -60,7 +60,7 @@
 				<serie>xx</serie>
 			</serien>
 			<genres>
-				<genre welche="abo">thriller</genre>
+				<genre welcheanzeigen="abo">thriller</genre>
 				<genre>comedy</genre>
 			</genres>
 		</abos>

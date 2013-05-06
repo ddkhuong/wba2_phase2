@@ -8,22 +8,22 @@
         <xs:element name="alleStaffeln">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="staffel" maxOccurs="unbounded" minOccurs="0">
+              <xs:element name="staffel" maxOccurs="unbounded" minOccurs="1">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="episode" maxOccurs="unbounded" minOccurs="0">
+                    <xs:element name="episode" maxOccurs="unbounded" minOccurs="1">
                       <xs:complexType mixed="true">
                         <xs:sequence>
                           <xs:element type="xs:float" name="nummer"/>
                           <xs:element type="xs:string" name="name"/>
-                          <xs:element type="xs:string" name="datum"/>
+                          <xs:element type="xs:date" name="datum"/>
                           <xs:element type="xs:string" name="episodenbeschreibung"/>
                         </xs:sequence>
-                        <xs:attribute type="xs:byte" name="id" use="optional"/>
+                        <xs:attribute type="xs:ID" name="id" use="required"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                  <xs:attribute type="xs:ID" name="id" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -32,14 +32,14 @@
         <xs:element name="cast">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="darsteller" maxOccurs="unbounded" minOccurs="0">
+              <xs:element name="darsteller" maxOccurs="unbounded" minOccurs="1">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="bild">
                       <xs:complexType>
                         <xs:simpleContent>
                           <xs:extension base="xs:string">
-                            <xs:attribute type="xs:string" name="url" use="optional"/>
+                            <xs:attribute type="xs:string" name="url" use="required"/>
                           </xs:extension>
                         </xs:simpleContent>
                       </xs:complexType>
@@ -47,14 +47,14 @@
                     <xs:element type="xs:string" name="name"/>
                     <xs:element type="xs:string" name="beschreibung"/>
                   </xs:sequence>
-                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                  <xs:attribute type="xs:ID" name="id" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
-      <xs:attribute type="xs:byte" name="id"/>
+      <xs:attribute type="xs:ID" name="id"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

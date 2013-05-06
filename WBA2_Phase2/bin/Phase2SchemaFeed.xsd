@@ -5,12 +5,12 @@
         <xs:element name="news">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:string" name="serienname" minOccurs="0"/>
+              <xs:element type="xs:string" name="serienname" minOccurs="1"/>
               <xs:element name="bild">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
-                      <xs:attribute type="xs:anyURI" name="url" use="optional"/>
+                      <xs:attribute type="xs:anyURI" name="url" use="required"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -19,7 +19,7 @@
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
-                      <xs:attribute type="xs:anyURI" name="url" use="optional"/>
+                      <xs:attribute type="xs:anyURI" name="url" use="required"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -33,18 +33,18 @@
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element type="xs:string" name="autor"/>
-                          <xs:element type="xs:string" name="datum"/>
-                          <xs:element type="xs:string" name="zeit"/>
+                          <xs:element type="xs:date" name="datum"/>
+                          <xs:element type="xs:time" name="zeit"/>
                           <xs:element type="xs:string" name="inhalt"/>
                         </xs:sequence>
-                        <xs:attribute type="xs:byte" name="id" use="optional"/>
+                        <xs:attribute type="xs:ID" name="id" use="required"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <xs:attribute type="xs:byte" name="id" use="optional"/>
+            <xs:attribute type="xs:ID" name="id" use="required"/>
           </xs:complexType>
         </xs:element>
       </xs:choice>
