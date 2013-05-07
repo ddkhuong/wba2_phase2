@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serie id="1">
+<name>XY</name>
+<genre>Comedy</genre>
+
+	<beschreibung>Von der The Lying Game wurden bislang 30 Episoden produziert.
+	 Die Fernsehserie kommt auf insgesamt zwei Staffeln. Die erste Episode der Serie,
+	 die den Titel Pilot trägt, wurde am Montag, den 15. August 2011 ausgestrahlt.
+	 Die letzte Episode, die am Dienstag, den 12. März 2013 ausgestrahlt wurde, hieß To Lie For (2x10).
+	 </beschreibung>
+	 
+	 <alleStaffeln>
+	 	<staffel id="1">
+	 		<episode id="1">
+	 			<nummer>1.1</nummer>
+	 	 		<name>Pilot</name>
+	 	 		<datum>01.01.2013</datum>
+	 	 		<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+	 		</episode>
+	 		<episode id="2">Toll
+	 			<nummer>1.2</nummer>
+	 			<name>Zweite Folge</name>
+	 			<datum>08.01.2013</datum>
+	 			<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+	 		</episode>
+	 	</staffel>
+	 	<staffel id="2">
+	 		<episode id="3">Staffel2
+	 			<nummer>2.1</nummer>
+	 			<name>Zweite Staffel</name>
+	 			<datum>01.01.2014</datum>
+	 			<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+	 		</episode>
+	 	</staffel>
+	 </alleStaffeln>
+
+ <cast>
+	<darsteller id="1">
+		<bild url="bsp.jpg"></bild>
+		<name>Chuck Norris</name>
+		<beschreibung>Beispiel Beschreibung</beschreibung>
+	</darsteller>
+	<darsteller id="2">
+		<bild url="bsp2.jpg"></bild>
+		<name>Derp Depp</name>
+		<beschreibung>Beispiel2 Beschreibung</beschreibung>
+	</darsteller>
+</cast>
+</serie>

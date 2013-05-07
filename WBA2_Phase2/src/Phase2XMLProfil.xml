@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile>
+	<profil id="1">
+		<user >Max Mustermann</user>
+		<profilbild >MaxMustermann.jpg</profilbild>
+		<breschreibung>Ich bin toll</breschreibung>
+		<filtercontainer>
+			<filter id="1">
+				<serie>xy</serie>
+				<serie>yx</serie>
+				<genre>comedy</genre>
+			</filter>
+			<filter id="2">
+				<genre>thriller</genre>
+			</filter>
+			<filter id="3">
+				<serie>xy</serie>
+				<serie>xx</serie>
+				<serie>yy</serie>
+			</filter>
+		</filtercontainer>
+		<abos>
+			<serien>
+				<serie>xy</serie>
+				<serie>yx</serie>
+				<serie>yy</serie>
+				<serie>xx</serie>
+			</serien>
+			<genres>
+				<genre>thriller</genre>
+				<genre>comedy</genre>
+			</genres>
+		</abos>
+	
+	</profil>
+	<profil id="2">
+		<user >Frauke Mustermann</user>
+		<profilbild >FraukeMustermann.jpg</profilbild>
+		<breschreibung>Ich bin toller</breschreibung>
+		<filtercontainer>
+			<filter id="4">
+				<serie>zz</serie>
+				<serie>yxz</serie>
+				<genre>comedy</genre>
+			</filter>
+			<filter id="5">
+				<genre welcheanzeigen="all">thriller</genre>
+			</filter>
+			<filter id="6">
+				<serie>xy</serie>
+				<serie>xx</serie>
+				<serie>yy</serie>
+			</filter>
+		</filtercontainer>
+		<abos>
+			<serien>
+				<serie>xy</serie>
+				<serie>yx</serie>
+				<serie>yy</serie>
+				<serie>xx</serie>
+			</serien>
+			<genres>
+				<genre welcheanzeigen="abo">thriller</genre>
+				<genre>comedy</genre>
+			</genres>
+		</abos>
+	
+	</profil>
+</profile>
