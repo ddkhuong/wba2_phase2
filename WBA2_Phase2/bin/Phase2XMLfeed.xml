@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed>
-	<news id="0">
+	<news id="A0">
 		<serienname>XY</serienname>
 		<bild url="http://n-cdn.serienjunkies.de/p/48838.jpg"></bild>
 		<artikel url="http://www.serienjunkies.de/news/arrow-beliebte-figur-feldeinsatz-48838.html"></artikel>
@@ -10,13 +10,13 @@
 		das weibliche Mitglied von Team Arrow auf eine eigene Missionen aufbrechen.
 	 	</beschreibung>
 	 	<kommentare>
-			<kommentar id="1">
+			<kommentar id="C1">
 				<autor>Max Mustermann</autor>
 				<datum>01.01.1900</datum>
 				<zeit>13:00</zeit>
 				<inhalt>Test Inhalt</inhalt>
 			</kommentar>
-			<kommentar id="2">
+			<kommentar id="C2">
 				<autor>Frauke Mustermann</autor>
 				<datum>02.02.1900</datum>
 				<zeit>13:00</zeit>
@@ -24,7 +24,7 @@
 			</kommentar>
 		</kommentare>
 	</news>
-	<news id="1">
+	<news id="A1">
 	<bild url="http://n-cdn.serienjunkies.de/p/49060.jpg"></bild>
 		<artikel url="http://www.serienjunkies.de/news/play-day-staffel-big-49059.html"></artikel>
 		<titel>Play By Day: SyFy setzt 4. Staffel von Warehouse 13 fort</titel>
@@ -33,13 +33,13 @@
 		  Zehn neue Episoden gesellen sich zu den bislang ausgestrahlten.
 	 	</beschreibung>
 	 		 	<kommentare>
-			<kommentar id="1">
+			<kommentar id="B1">
 				<autor>Max Mustermann</autor>
 				<datum>01.02.1901</datum>
 				<zeit>14:00</zeit>
 				<inhalt>Test Inhal3t</inhalt>
 			</kommentar>
-			<kommentar id="2">
+			<kommentar id="B2">
 				<autor>Frauke Mustermann</autor>
 				<datum>02.02.1920</datum>
 				<zeit>17:00</zeit>
