@@ -236,7 +236,7 @@ public class SerienService {
 	 @Path("/{serie}/staffel/{staffel_id}")
 	 @Consumes(MediaType.APPLICATION_XML)
 	 @Produces(MediaType.APPLICATION_XML)
-	 public Response deleteFilter(@PathParam("serie") String serie,
+	 public Response deleteStaffel(@PathParam("serie") String serie,
 			   						@PathParam("staffel_id") String staffel_id) throws JAXBException, FileNotFoundException{
 		   
 		   	Serien s_daten = unmarshalSerien(); 
