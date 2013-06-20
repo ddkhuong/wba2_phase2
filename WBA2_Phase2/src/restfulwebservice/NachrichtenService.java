@@ -127,8 +127,7 @@ public class NachrichtenService {
 	   @Path("/{news_id}")
 	   @Consumes(MediaType.APPLICATION_XML)
 	   @Produces(MediaType.APPLICATION_XML)
-	   public Response putNachricht(@PathParam("news_id") String news_id,
-			   						News n) throws JAXBException, FileNotFoundException{
+	   public Response putNachricht(@PathParam("news_id") String news_id, News n) throws JAXBException, FileNotFoundException{
 		   Nachrichten news_daten = unmarshalFeed();
 		   int id_temp = Integer.parseInt(news_id);
 		   
@@ -190,8 +189,7 @@ public class NachrichtenService {
 	   @Path("/{news_id}/kommentare/")
 	   @Consumes(MediaType.APPLICATION_XML)
 	   @Produces(MediaType.APPLICATION_XML)
-	   public Response postKommentar(@PathParam("news_id") String news_id,
-			   						Kommentar k) throws FileNotFoundException, JAXBException{
+	   public Response postKommentar(@PathParam("news_id") String news_id,Kommentar k) throws FileNotFoundException, JAXBException{
 		 
 		   Nachrichten news_daten = unmarshalFeed();
 		   Kommentare k_list = getKommentare(news_id);
@@ -217,8 +215,8 @@ public class NachrichtenService {
 	   @Consumes(MediaType.APPLICATION_XML)
 	   @Produces(MediaType.APPLICATION_XML)
 	   public Response deleteKommentar(@PathParam("news_id") String news_id,
-			   						@PathParam("kommentar_id") String kommentar_id,
-			   						Kommentar k) throws JAXBException, FileNotFoundException{
+		   						@PathParam("kommentar_id") String kommentar_id,
+		   						Kommentar k) throws JAXBException, FileNotFoundException{
 		   
 		   	Nachrichten news_daten = unmarshalFeed(); 
 		   	Kommentare k_list = getKommentare(news_id);
