@@ -34,9 +34,19 @@ import resources.Serie.Serie;
 import resources.Serie.Serien;
 import resources.Serie.Staffel;
 
+/**
+ * @author Duy
+ *
+ */
 @Path("/serie")
 public class SerienService {
 
+	/**
+	 * 
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	public Serien unmarshalSerien() throws JAXBException, FileNotFoundException {
 		JAXBContext context = JAXBContext.newInstance(Serien.class);
 		Unmarshaller um = context.createUnmarshaller();
@@ -45,6 +55,11 @@ public class SerienService {
 		return serien;
 	}
 
+	/**
+	 * 
+	 * @param s
+	 * @throws JAXBException
+	 */
 	public void marshalSerien(Serien s) throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(Serien.class);
 		Marshaller m = context.createMarshaller();
@@ -56,6 +71,12 @@ public class SerienService {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	public String nextIdSerie() throws JAXBException, FileNotFoundException {
 		List<Serie> list = unmarshalSerien().getSerie();
 		int id = Integer.parseInt(list.get(list.size() - 1).getId());
@@ -68,6 +89,12 @@ public class SerienService {
 		return String.valueOf(id);
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Serien getSerien() throws JAXBException, FileNotFoundException {
@@ -76,7 +103,13 @@ public class SerienService {
 		return serien;
 
 	}
-
+/**
+ * 
+ * @param serie
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@GET
 	@Path("/{serie}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -91,7 +124,13 @@ public class SerienService {
 		}
 		return s;
 	}
-
+/**
+ * 
+ * @param serie
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@GET
 	@Path("/{serie}/id")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -104,7 +143,13 @@ public class SerienService {
 
 		return s_id;
 	}
-
+/**
+ * 
+ * @param serie
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@DELETE
 	@Path("/{serie}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -125,7 +170,13 @@ public class SerienService {
 		return Response.status(404).build();
 
 	}
-
+/**
+ * 
+ * @param s
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
@@ -142,7 +193,14 @@ public class SerienService {
 		return Response.status(201).build();
 
 	}
-
+/**
+ * 
+ * @param serien_id
+ * @param s
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@PUT
 	@Path("/{serien_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -173,7 +231,13 @@ public class SerienService {
 
 		return Response.ok().build();
 	}
-
+/**
+ * 
+ * @param serie
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@GET
 	@Path("/{serie}/staffel")
 	@Produces(MediaType.APPLICATION_XML)
@@ -187,6 +251,13 @@ public class SerienService {
 
 	}
 
+	/**
+	 * @param serie
+	 * @param staffel_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{serie}/staffel/{staffel_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -202,11 +273,17 @@ public class SerienService {
 				s = st_list.getStaffel().get(i);
 			}
 		}
-
 		return s;
 
 	}
-
+/**
+ * 
+ * @param serie
+ * @param st
+ * @return
+ * @throws JAXBException
+ * @throws FileNotFoundException
+ */
 	@POST
 	@Path("/{serie}/staffel/")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -235,6 +312,13 @@ public class SerienService {
 		return Response.status(201).build();
 	}
 
+	/**
+	 * @param serie
+	 * @param staffel_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{serie}/staffel/{staffel_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -260,6 +344,14 @@ public class SerienService {
 		return Response.status(404).build();
 	}
 
+	/**
+	 * @param serie
+	 * @param staffel_id
+	 * @param st
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@PUT
 	@Path("/{serie}/staffel/{staffel_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -296,6 +388,14 @@ public class SerienService {
 		return Response.ok().build();
 	}
 
+	/**
+	 * @param serie
+	 * @param staffel_id
+	 * @param episoden_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{serie}/staffel/{staffel_id}/episode/{episoden_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -311,6 +411,15 @@ public class SerienService {
 
 	}
 
+	/**
+	 * 
+	 * @param serie
+	 * @param staffel_id
+	 * @param e
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@POST
 	@Path("/{serie}/staffel/{staffel_id}/episode/")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -345,6 +454,15 @@ public class SerienService {
 
 	}
 
+	/**
+	 * 
+	 * @param serie
+	 * @param staffel_id
+	 * @param episoden_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{serie}/staffel/{staffel_id}/episode/{episoden_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -375,6 +493,12 @@ public class SerienService {
 		return Response.status(404).build();
 	}
 
+	/**
+	 * @param serie
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{serie}/cast")
 	@Produces(MediaType.APPLICATION_XML)
@@ -386,6 +510,13 @@ public class SerienService {
 		return c;
 	}
 
+	/**
+	 * @param serie
+	 * @param c
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@PUT
 	@Path("/{serie}/cast")
 	@Consumes(MediaType.APPLICATION_XML)

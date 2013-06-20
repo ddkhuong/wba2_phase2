@@ -4,7 +4,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.sun.jersey.api.client.*;
 
-public class TestClient {
+public class RestClient {
 	public static void main(String[] args) {
 
 		String url = (args.length > 0) ? args[0]

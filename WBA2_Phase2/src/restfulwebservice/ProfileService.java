@@ -30,6 +30,11 @@ import resources.Profil.Serien;
 @Path("/profile")
 public class ProfileService {
 
+	/**
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	public Profile unmarshalProfil() throws JAXBException,
 			FileNotFoundException {
 
@@ -40,6 +45,10 @@ public class ProfileService {
 		return profil;
 	}
 
+	/**
+	 * @param p
+	 * @throws JAXBException
+	 */
 	public void marshalProfil(Profile p) throws JAXBException {
 
 		JAXBContext context = JAXBContext.newInstance(Profile.class);
@@ -52,6 +61,11 @@ public class ProfileService {
 		}
 	}
 
+	/**
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	public String nextIdProfil() throws JAXBException, FileNotFoundException {
 
 		List<Profil> list = unmarshalProfil().getProfil();
@@ -65,6 +79,11 @@ public class ProfileService {
 		return String.valueOf(id);
 	}
 
+	/**
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Profile getProfile() throws JAXBException, FileNotFoundException {
@@ -75,6 +94,12 @@ public class ProfileService {
 
 	}
 
+	/**
+	 * @param profil_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{profil_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -91,6 +116,12 @@ public class ProfileService {
 		return p;
 	}
 
+	/**
+	 * @param p
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
@@ -108,6 +139,13 @@ public class ProfileService {
 
 	}
 
+	/**
+	 * @param profil_id
+	 * @param p
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@PUT
 	@Path("/{profil_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -136,6 +174,13 @@ public class ProfileService {
 		return Response.ok().build();
 	}
 
+	/**
+	 * @param profil_id
+	 * @param p
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{profil_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -156,6 +201,12 @@ public class ProfileService {
 		return Response.status(404).build();
 	}
 
+	/**
+	 * @param profil_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{profil_id}/filter")
 	@Produces(MediaType.APPLICATION_XML)
@@ -168,6 +219,13 @@ public class ProfileService {
 		return f;
 	}
 
+	/**
+	 * @param profil_id
+	 * @param filter_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{profil_id}/filter/{filter_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -187,6 +245,13 @@ public class ProfileService {
 		return f;
 	}
 
+	/**
+	 * @param profil_id
+	 * @param f
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@POST
 	@Path("/{profil_id}/filter/")
 	@Produces(MediaType.APPLICATION_XML)
@@ -213,6 +278,13 @@ public class ProfileService {
 		return Response.status(201).build();
 	}
 
+	/**
+	 * @param profil_id
+	 * @param filter_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{profil_id}/filter/{filter_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -236,6 +308,12 @@ public class ProfileService {
 		return Response.status(404).build();
 	}
 
+	/**
+	 * @param profil_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{profil_id}/abos")
 	@Produces(MediaType.APPLICATION_XML)
@@ -247,6 +325,13 @@ public class ProfileService {
 		return a;
 	}
 
+	/**
+	 * @param profil_id
+	 * @param serie
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@POST
 	@Path("/{profil_id}/abos")
 	@Produces(MediaType.APPLICATION_XML)
@@ -264,6 +349,13 @@ public class ProfileService {
 		return Response.status(201).build();
 	}
 
+	/**
+	 * @param profil_id
+	 * @param serie
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{profil_id}/abos/")
 	@Consumes(MediaType.APPLICATION_XML)

@@ -22,6 +22,11 @@ import java.util.List;
 @Path("/news")
 public class NachrichtenService {
 
+	/**
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	public Nachrichten unmarshalFeed() throws JAXBException,
 			FileNotFoundException {
 
@@ -32,6 +37,10 @@ public class NachrichtenService {
 		return news;
 	}
 
+	/**
+	 * @param n
+	 * @throws JAXBException
+	 */
 	public void marshalFeed(Nachrichten n) throws JAXBException {
 
 		JAXBContext context = JAXBContext.newInstance(Nachrichten.class);
@@ -44,6 +53,11 @@ public class NachrichtenService {
 		}
 	}
 
+	/**
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	public String nextIdNews() throws JAXBException, FileNotFoundException {
 
 		List<News> list = unmarshalFeed().getFeed().getNews();
@@ -57,6 +71,11 @@ public class NachrichtenService {
 		return String.valueOf(id);
 	}
 
+	/**
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Nachrichten getNachrichten() throws JAXBException,
@@ -67,6 +86,12 @@ public class NachrichtenService {
 
 	}
 
+	/**
+	 * @param news_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{news_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -83,6 +108,12 @@ public class NachrichtenService {
 		return n;
 	}
 
+	/**
+	 * @param news_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("{news_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -102,6 +133,12 @@ public class NachrichtenService {
 		return Response.status(404).build();
 	}
 
+	/**
+	 * @param n
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
@@ -119,6 +156,13 @@ public class NachrichtenService {
 
 	}
 
+	/**
+	 * @param news_id
+	 * @param n
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@PUT
 	@Path("/{news_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -149,6 +193,12 @@ public class NachrichtenService {
 		return Response.ok().build();
 	}
 
+	/**
+	 * @param news_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("/{news_id}/kommentare")
 	@Produces(MediaType.APPLICATION_XML)
@@ -159,6 +209,13 @@ public class NachrichtenService {
 		return k;
 	}
 
+	/**
+	 * @param news_id
+	 * @param kommentar_id
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@GET
 	@Path("{news_id}/kommentare/{kommentar_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -178,6 +235,13 @@ public class NachrichtenService {
 		return k;
 	}
 
+	/**
+	 * @param news_id
+	 * @param k
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws JAXBException
+	 */
 	@POST
 	@Path("/{news_id}/kommentare/")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -205,6 +269,14 @@ public class NachrichtenService {
 		return Response.status(201).build();
 	}
 
+	/**
+	 * @param news_id
+	 * @param kommentar_id
+	 * @param k
+	 * @return
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{news_id}/kommentare/{kommentar_id}")
 	@Consumes(MediaType.APPLICATION_XML)
