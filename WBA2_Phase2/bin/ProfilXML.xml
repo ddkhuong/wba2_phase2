@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<profile>
+    <profil id="1">
+        <user>Max Mustermann</user>
+        <profilbild>MaxMustermann.jpg</profilbild>
+        <beschreibung>Ich bin toll</beschreibung>
+        <filtercontainer>
+            <filter id="1">
+                <serie>xy</serie>
+                <serie>yx</serie>
+            </filter>
+            <filter id="3">
+                <serie>xy</serie>
+                <serie>xx</serie>
+                <serie>yy</serie>
+            </filter>
+            <filter id="4">
+                <serie>Hallo</serie>
+                <serie>Its Me</serie>
+                <serie>Mario</serie>
+            </filter>
+        </filtercontainer>
+        <abos>
+            <serien>
+                <serie>4</serie>
+                <serie>5</serie>
+                <serie>Game of Thrones</serie>
+            </serien>
+        </abos>
+    </profil>
+    <profil id="2">
+        <user>Hans Peter</user>
+        <profilbild>MaxMustermann.jpg</profilbild>
+        <beschreibung>Cheerio</beschreibung>
+        <filtercontainer/>
+        <abos/>
+    </profil>
+    <profil id="3">
+        <user>Hans Peter</user>
+        <profilbild>MaxMustermann.jpg</profilbild>
+        <beschreibung>Cheerio</beschreibung>
+        <filtercontainer/>
+        <abos/>
+    </profil>
+</profile>

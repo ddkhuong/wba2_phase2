@@ -13,5 +13,9 @@
 	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/WBA_2_Phase_2_jars/grizzly-servlet-webserver-1.9.18.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/jaxb-ri-20120218/lib/jaxb-xjc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/restclient-ui-2.3.3-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/smack_3_3_0/smack.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/smack_3_3_0/smackx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/smack_3_3_0/smackx-debug.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/smack_3_3_0/smackx-jingle.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,133 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+	<xs:element name = "serien">
+		<xs:complexType>
+			<xs:sequence>			
+				<xs:element ref="serie" maxOccurs="unbounded" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="serie">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name"/>
+				<xs:element ref="genre"/>
+				<xs:element ref="beschreibung"/>
+				<xs:element ref="alleStaffeln"/>
+				<xs:element ref="cast"/>
+			</xs:sequence>
+			<xs:attribute type="xs:ID" name="id"/>
+		</xs:complexType>
+	</xs:element>
+				
+				
+	<xs:element name="name">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+							
+	<xs:element name="genre">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<xs:element name="beschreibung">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+							
+							
+	<xs:element name="alleStaffeln">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="staffel" maxOccurs="unbounded" minOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+							
+	<xs:element name="staffel">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="episode" maxOccurs="unbounded" minOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute type="xs:ID" name="id" use="required"/>
+		</xs:complexType>
+	</xs:element>
+							
+							
+	<xs:element name="episode">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+			  <xs:element name="nummer">
+			  <xs:simpleType>
+			  <xs:restriction base="xs:float">
+			  <xs:minInclusive value="1"/>
+			  </xs:restriction>
+			  </xs:simpleType>
+			  </xs:element>
+			  <xs:element name="name">
+			  <xs:simpleType>
+			  <xs:restriction base="xs:string">
+			  <xs:minLength value="1"/>
+			  </xs:restriction>
+			  </xs:simpleType>
+			  </xs:element>
+			  <xs:element name="datum">
+			  <xs:simpleType>
+			  <xs:restriction base="xs:date">
+			  <xs:minInclusive value="1990-01-01"/>
+			  <xs:maxInclusive value="9999-12-31"/>
+			  </xs:restriction>
+			  </xs:simpleType>
+			  </xs:element>
+			  <xs:element name="episodenbeschreibung">
+			  <xs:simpleType>
+			  <xs:restriction base="xs:string">
+			  <xs:minLength value="1"/>
+			  </xs:restriction>
+			  </xs:simpleType>
+			  </xs:element>
+			</xs:sequence>
+			<xs:attribute type="xs:ID" name="id" use="required"/>
+		</xs:complexType>
+	</xs:element>
+							
+	<xs:element name="cast">
+		<xs:complexType>
+			<xs:sequence>
+					<xs:element ref="darsteller" maxOccurs="unbounded" minOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="darsteller">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bild">
+					<xs:complexType>
+						<xs:simpleContent>
+						  <xs:extension base="xs:string">
+						  <xs:attribute type="xs:string" name="url"
+						  use="required"/>
+						  </xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element type="xs:string" name="name"/>
+				<xs:element type="xs:string" name="beschreibung"/>
+			</xs:sequence>
+			<xs:attribute type="xs:ID" name="id" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
