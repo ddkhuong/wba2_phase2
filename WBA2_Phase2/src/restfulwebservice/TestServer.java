@@ -14,9 +14,10 @@ public class TestServer {
 			
 			SelectorThread srv = GrizzlyServerFactory.create(url);
 			
-			System.out.println("URL: " + url);
+			System.out.println("Server wurde gestartet"+ "\n" + "URL: " + url);
 			Thread.sleep( 1000 * 60 * 10);
 			srv.stopEndpoint();
+			System.out.println("Server wurde beendet");
 	}
 
 }

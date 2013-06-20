@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<serien>
+    <serie id="1">
+        <name>Pokemon</name>
+        <genre>Anime</genre>
+        <beschreibung>Pikachu
+		</beschreibung>
+        <alleStaffeln>
+            <staffel id="1">
+                <episode id="1">
+					<nummer>1.1</nummer>
+					<name>Pilot</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+                <episode id="2">
+					<nummer>1.2</nummer>
+					<name>Zweite Folge</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+            </staffel>
+            <staffel id="2">
+                <episode id="3">
+					<nummer>2.1</nummer>
+					<name>Zweite Staffel</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+            </staffel>
+        </alleStaffeln>
+        <cast>
+            <darsteller id="1">
+                <bild url="bsp.jpg"></bild>
+                <name>Chuck Norris</name>
+                <beschreibung>Beispiel Beschreibung</beschreibung>
+            </darsteller>
+            <darsteller id="2">
+                <bild url="bsp2.jpg"></bild>
+                <name>Derp Depp</name>
+                <beschreibung>Beispiel2 Beschreibung</beschreibung>
+            </darsteller>
+        </cast>
+    </serie>
+    <serie id="2">
+        <name>Heroes</name>
+        <genre>Drama</genre>
+        <beschreibung>Michael bricht aus
+		</beschreibung>
+        <alleStaffeln>
+            <staffel id="1">
+                <episode id="1">
+					<nummer>1.1</nummer>
+					<name>Pilot</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+                <episode id="2">
+					<nummer>1.2</nummer>
+					<name>Zweite Folge</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+            </staffel>
+            <staffel id="2">
+                <episode id="1">
+					<nummer>1.0</nummer>
+					<name>Test Put</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+            </staffel>
+        </alleStaffeln>
+        <cast>
+            <darsteller id="1">
+                <bild url="bsp.jpg"></bild>
+                <name>Hans Sarpei</name>
+                <beschreibung>Beispiel Beschreibung</beschreibung>
+            </darsteller>
+            <darsteller id="2">
+                <bild url="bsp2.jpg"></bild>
+                <name>Peter Griffin</name>
+                <beschreibung>Beispiel2 Beschreibung</beschreibung>
+            </darsteller>
+        </cast>
+    </serie>
+    <serie id="3">
+        <name>Prison Break</name>
+        <genre>Drama</genre>
+        <beschreibung>Michael bricht aus zum zweiten Mal
+		</beschreibung>
+        <alleStaffeln>
+            <staffel id="1">
+                <episode id="1">
+					<nummer>1.1</nummer>
+					<name>Pilot</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+                <episode id="2">
+					<nummer>1.2</nummer>
+					<name>Zweite Folge</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+            </staffel>
+            <staffel id="2">
+                <episode id="3">
+					<nummer>2.1</nummer>
+					<name>Zweite Staffel</name>
+					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
+				</episode>
+            </staffel>
+        </alleStaffeln>
+        <cast>
+            <darsteller id="1">
+                <bild url="bsp.jpg"></bild>
+                <name>Hans Sarpei</name>
+                <beschreibung>Beispiel Beschreibung</beschreibung>
+            </darsteller>
+            <darsteller id="2">
+                <bild url="bsp2.jpg"></bild>
+                <name>Peter Griffin</name>
+                <beschreibung>Beispiel2 Beschreibung</beschreibung>
+            </darsteller>
+        </cast>
+    </serie>
+</serien>

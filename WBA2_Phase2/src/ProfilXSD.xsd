@@ -1,0 +1,83 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="profile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="profil" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+<xs:element name="profil">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="user"/>
+							<xs:element type="xs:string" name="profilbild"/>
+							<xs:element ref="beschreibung"/>
+							<xs:element ref="filtercontainer"/>
+							<xs:element ref="abos"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:ID" name="id" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+				
+				
+				
+	<xs:element name="user">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="5"/>
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+
+                            
+	<xs:element name="beschreibung">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="150"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+                            
+	<xs:element name="filtercontainer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="filter" maxOccurs="unbounded" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="filter">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element type="xs:string" name="serie"
+			  maxOccurs="unbounded" minOccurs="0"/>
+			  
+			</xs:sequence>
+			<xs:attribute type="xs:ID" name="id" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="abos">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="serien"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="serien">
+					<xs:complexType>
+						<xs:sequence>
+						  <xs:element type="xs:string" name="serie"
+						  maxOccurs="unbounded" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				
+</xs:schema>

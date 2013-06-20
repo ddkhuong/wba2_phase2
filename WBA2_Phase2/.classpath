@@ -11,6 +11,7 @@
 	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/WBA_2_Phase_2_jars/jersey/jettison-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/WBA_2_Phase_2_jars/jersey/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/WBA_2_Phase_2_jars/grizzly-servlet-webserver-1.9.18.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/JAXB2_20120218.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/jaxb-ri-20120218/lib/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duy/Documents/FH - Dokumente/WBA2/Phase 2/restclient-ui-2.3.3-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
