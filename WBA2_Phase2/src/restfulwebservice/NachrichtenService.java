@@ -19,11 +19,17 @@ import resources.Nachrichten.News;
 import java.lang.String;
 import java.util.List;
 
+/**
+ * @author Duy
+ *
+ */
 @Path("/news")
 public class NachrichtenService {
 
 	/**
-	 * @return
+	 * Unmarshalt den Feed, der eine Liste aller News enthält.
+	 * 
+	 * @return Feed-Objekt
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -32,13 +38,14 @@ public class NachrichtenService {
 
 		JAXBContext context = JAXBContext.newInstance(Nachrichten.class);
 		Unmarshaller um = context.createUnmarshaller();
-		Nachrichten news = (Nachrichten) um.unmarshal(new FileInputStream(
-				"src/FeedXML.xml"));
-		return news;
+		Nachrichten feed = (Nachrichten) um.unmarshal(new FileInputStream("src/FeedXML.xml"));
+		return feed;
 	}
 
 	/**
-	 * @param n
+	 * Marshalt die veränderte XML-Datei "FeedXML.xml"
+	 * 
+	 * @param n Ein Objekt der Klasse Nachrichten
 	 * @throws JAXBException
 	 */
 	public void marshalFeed(Nachrichten n) throws JAXBException {
@@ -54,14 +61,19 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @return
+	 * Nimmt die ID des letzten Objekts "News" in der Liste und erhöht diese um
+	 * eins.
+	 * 
+	 * @return gibt die um eins erhöhte ID zurück
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
 	public String nextIdNews() throws JAXBException, FileNotFoundException {
 
 		List<News> list = unmarshalFeed().getFeed().getNews();
-		int id = Integer.parseInt(list.get(list.size() - 1).getId());
+		
+		// list.size()-1 zur Vermeidung eine IndexOutOfBoundsException
+		int id = Integer.parseInt(list.get(list.size()-1).getId());
 
 		if (list.size() > 0) {
 			id++;
@@ -72,7 +84,9 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @return
+	 * Gibt eine Liste aller Nachrichten-Objekte zurück.
+	 * 
+	 * @return Liste aller Nachrichten
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -80,6 +94,7 @@ public class NachrichtenService {
 	@Produces(MediaType.APPLICATION_XML)
 	public Nachrichten getNachrichten() throws JAXBException,
 			FileNotFoundException {
+		
 		Nachrichten news = unmarshalFeed();
 
 		return news;
@@ -87,8 +102,10 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param news_id
-	 * @return
+	 * Ausgabe der mit der ID versehenen News.
+	 * 
+	 * @param news_id ID der auszugebenden News
+	 * @return angeforderte News
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -100,6 +117,8 @@ public class NachrichtenService {
 
 		Nachrichten news_daten = unmarshalFeed();
 		News n = null;
+		
+		//Durchlaufen der Liste und Vergleich der ID bis gesuchtes Objekt gefunden
 		for (int i = 0; i < news_daten.getFeed().getNews().size(); i++) {
 			if (news_id.equals(news_daten.getFeed().getNews().get(i).getId())) {
 				n = news_daten.getFeed().getNews().get(i);
@@ -109,8 +128,11 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param news_id
-	 * @return
+	 * Löscht die News mit der übergebenen ID "news_id".
+	 * 
+	 * 
+	 * @param news_id ID der zu löschenden News
+	 * @return Status-Code ok wenn gelöscht, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -121,8 +143,12 @@ public class NachrichtenService {
 			throws JAXBException, FileNotFoundException {
 
 		Nachrichten news_daten = unmarshalFeed();
+		
+		//Durchsuchen der Liste nach der News mit der ID "news_id"
 		for (int i = 0; i < news_daten.getFeed().getNews().size(); i++) {
 			if (news_id.equals(news_daten.getFeed().getNews().get(i).getId())) {
+				
+				//Entfernen der News
 				news_daten.getFeed().getNews().remove(i);
 				marshalFeed(news_daten);
 				System.out.println("News wurde gelöscht");
@@ -134,8 +160,14 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param n
-	 * @return
+	 * Erstellt eine neue News und fügt diese zur vorhandenen Liste hinzu, die
+	 * ID ist dabei die des letzten Objekts in der Liste um eins erhöht.
+	 * 
+	 * Das Objekt n muss in der XML-Struktur der News übergeben werden. 
+	 * 
+	 * 
+	 * @param n News-Objekt in XML-Struktur
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -147,7 +179,7 @@ public class NachrichtenService {
 
 		Nachrichten news_daten = unmarshalFeed();
 
-		n.setId(nextIdNews());
+		n.setId(nextIdNews()); //Setzen der News-ID 
 
 		news_daten.getFeed().getNews().add(n);
 		marshalFeed(news_daten);
@@ -157,9 +189,12 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param news_id
-	 * @param n
-	 * @return
+	 * Verändert eine bereits vorhandene News oder fügt sie hinzu, wenn diese 
+	 * noch nicht verhanden ist.
+	 * 
+	 * @param news_id ID der zu verändernden News
+	 * @param n News-Objekt in XML-Struktur
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -173,13 +208,14 @@ public class NachrichtenService {
 		Nachrichten news_daten = unmarshalFeed();
 		int id_temp = Integer.parseInt(news_id);
 
+		//Einfügen falls bereits vorhanden
 		for (int i = 0; i < news_daten.getFeed().getNews().size(); i++) {
 			if (news_daten.getFeed().getNews().get(i).getId().equals(news_id)) {
 				String id = news_daten.getFeed().getNews().get(i).getId();
 				n.setId(id);
-				news_daten.getFeed().getNews()
-						.set((Integer.parseInt(id) - 1), n);
+				news_daten.getFeed().getNews().set((Integer.parseInt(id) - 1), n);
 			}
+			//Erstellen falls noch nicht vorhanden
 			if (id_temp > news_daten.getFeed().getNews().size()) {
 				n.setId(nextIdNews());
 				news_daten.getFeed().getNews().add(n);
@@ -194,8 +230,12 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param news_id
-	 * @return
+	 * Gibt eine Liste der gesamten Kommentar-Objekte, die einer bestimmten
+	 * News zugeordnet ist, aus.
+	 * 
+	 * 
+	 * @param news_id ID der News, für die die Kommentare ausgegeben werden sollen
+	 * @return Liste der Kommentar-Objekte
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -210,9 +250,13 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param news_id
-	 * @param kommentar_id
-	 * @return
+	 * Gibt den Kommentar mit der "kommentar_id" aus, die zur News mit der 
+	 * "news_id" gehört.
+	 * 
+	 * 
+	 * @param news_id ID der ausgewählten News
+	 * @param kommentar_id ID des auszugebenen Kommentar
+	 * @return Kommentar-Objekt in XML-Struktur
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -226,6 +270,7 @@ public class NachrichtenService {
 		Kommentare k_list = getKommentare(news_id);
 		Kommentar k = null;
 
+	
 		for (int i = 0; i < k_list.getKommentar().size(); i++) {
 			if (k_list.getKommentar().get(i).getId().equals(kommentar_id)) {
 				k = k_list.getKommentar().get(i);
@@ -236,9 +281,15 @@ public class NachrichtenService {
 	}
 
 	/**
-	 * @param news_id
-	 * @param k
-	 * @return
+	 * Erstellt einen neuen Kommentar und fügt diesen zur vorhandenen Liste
+	 * an Kommentaren hinzu.
+	 * 
+	 * Das Objekt k muss in der XML-Struktur eines Kommentars übergeben werden
+	 *  
+	 * 
+	 * @param news_id ID der ausgewöhlten News
+	 * @param k Kommentar-Objekt in XML-Form
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws FileNotFoundException
 	 * @throws JAXBException
 	 */
@@ -252,28 +303,29 @@ public class NachrichtenService {
 		Nachrichten news_daten = unmarshalFeed();
 		Kommentare k_list = getKommentare(news_id);
 		int size = k_list.getKommentar().size();
-		int lastid = Integer.parseInt(k_list.getKommentar().get(size - 1)
-				.getId());
+		int lastid = Integer.parseInt(k_list.getKommentar().get(size - 1).getId()); //ID des letzten Listen-Objekts
+		int n_id = (Integer.parseInt(news_id) - 1);
 
 		if (size > 0) {
-			lastid++;
+			lastid++; //ID, die dem neuen Objekt übergeben wird
 		} else {
 			lastid = 0;
 		}
 
 		k.setId(String.valueOf(lastid));
-		news_daten.getFeed().getNews().get(Integer.parseInt(news_id) - 1)
-				.getKommentare().getKommentar().add(k);
+		news_daten.getFeed().getNews().get(n_id).getKommentare().getKommentar().add(k);
 		marshalFeed(news_daten);
 
 		return Response.status(201).build();
 	}
 
 	/**
-	 * @param news_id
-	 * @param kommentar_id
-	 * @param k
-	 * @return
+	 * Löscht den ausgewählten Kommentar einer ausgewählten News.
+	 * 
+	 * 
+	 * @param news_id ID der auszuwählenden News
+	 * @param kommentar_id ID des auszuwählenden Kommentars
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -282,17 +334,16 @@ public class NachrichtenService {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Response deleteKommentar(@PathParam("news_id") String news_id,
-			@PathParam("kommentar_id") String kommentar_id, Kommentar k)
+			@PathParam("kommentar_id") String kommentar_id)
 			throws JAXBException, FileNotFoundException {
 
 		Nachrichten news_daten = unmarshalFeed();
 		Kommentare k_list = getKommentare(news_id);
+		int n_id = (Integer.parseInt(news_id) - 1);
 
 		for (int i = 0; i < k_list.getKommentar().size(); i++) {
 			if (kommentar_id.equals(k_list.getKommentar().get(i).getId())) {
-				news_daten.getFeed().getNews()
-						.get(Integer.parseInt(news_id) - 1).getKommentare()
-						.getKommentar().remove(i);
+				news_daten.getFeed().getNews().get(n_id).getKommentare().getKommentar().remove(i);
 				marshalFeed(news_daten);
 				System.out.println("Kommentar wurde gelöscht");
 				return Response.ok().build();
