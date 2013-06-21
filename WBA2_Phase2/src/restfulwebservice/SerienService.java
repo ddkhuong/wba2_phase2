@@ -91,6 +91,8 @@ public class SerienService {
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
+	
+	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Serien getSerien() throws JAXBException, FileNotFoundException {
@@ -206,10 +208,10 @@ public class SerienService {
 	}
 
 	/**
-	 * Verändert eine bereits vorhandene News oder fügt sie hinzu, wenn 
+	 * Verändert eine bereits vorhandene Serie oder fügt sie hinzu, wenn 
 	 * sie noch nicht vorhanden ist.
 	 * 
-	 * @param serien_id ID der zu verändernden News
+	 * @param serien_id ID der zu verändernden Serie
 	 * @param s Serien-Objekt in XML-Struktur
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
@@ -424,7 +426,7 @@ public class SerienService {
 	}
 
 	/**
-	 * Ausgabe der mit der ID "episoden_id" versehenen News.
+	 * Ausgabe der mit der ID "episoden_id" versehenen Episode.
 	 * 
 	 * @param serienname Name der Serie, der die Staffel zugeordnet ist
 	 * @param staffel_id ID der Staffel, der die Episode zugeordnet ist
@@ -441,11 +443,11 @@ public class SerienService {
 			@PathParam("episoden_id") String episoden_id) throws JAXBException,
 			FileNotFoundException {
 		
-		int e_id = Integer.parseInt(episoden_id);
+		int e_id = (Integer.parseInt(episoden_id)-1);
 		
 		Staffel st = getStaffel(serienname, staffel_id);
 		Episode e = st.getEpisode().get(e_id);
-
+	
 		return e;
 
 	}

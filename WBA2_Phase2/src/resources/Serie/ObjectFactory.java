@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.5 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.20 um 11:52:29 AM CEST 
+// Generiert: 2013.06.21 um 07:16:21 PM CEST 
 //
 
 
@@ -11,7 +11,6 @@ package resources.Serie;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 
 
@@ -35,9 +34,6 @@ public class ObjectFactory {
     private final static QName _Genre_QNAME = new QName("", "genre");
     private final static QName _Beschreibung_QNAME = new QName("", "beschreibung");
     private final static QName _Name_QNAME = new QName("", "name");
-    private final static QName _EpisodeEpisodenbeschreibung_QNAME = new QName("", "episodenbeschreibung");
-    private final static QName _EpisodeNummer_QNAME = new QName("", "nummer");
-    private final static QName _EpisodeDatum_QNAME = new QName("", "datum");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: resources.Serie
@@ -135,42 +131,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "name")
     public JAXBElement<String> createName(String value) {
         return new JAXBElement<String>(_Name_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "episodenbeschreibung", scope = Episode.class)
-    public JAXBElement<String> createEpisodeEpisodenbeschreibung(String value) {
-        return new JAXBElement<String>(_EpisodeEpisodenbeschreibung_QNAME, String.class, Episode.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "name", scope = Episode.class)
-    public JAXBElement<String> createEpisodeName(String value) {
-        return new JAXBElement<String>(_Name_QNAME, String.class, Episode.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Float }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "nummer", scope = Episode.class)
-    public JAXBElement<Float> createEpisodeNummer(Float value) {
-        return new JAXBElement<Float>(_EpisodeNummer_QNAME, Float.class, Episode.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "datum", scope = Episode.class)
-    public JAXBElement<XMLGregorianCalendar> createEpisodeDatum(XMLGregorianCalendar value) {
-        return new JAXBElement<XMLGregorianCalendar>(_EpisodeDatum_QNAME, XMLGregorianCalendar.class, Episode.class, value);
     }
 
 }

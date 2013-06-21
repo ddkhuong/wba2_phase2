@@ -63,13 +63,13 @@
 				</episode>
             </staffel>
             <staffel id="2">
-                <episode id="1">
-					<nummer>1.0</nummer>
-					<name>Test Put</name>
+				<episode id="1">
+					<nummer>1.1</nummer>
+					<name>Pilot</name>
 					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
 					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
 				</episode>
-            </staffel>
+			</staffel>
         </alleStaffeln>
         <cast>
             <darsteller id="1">

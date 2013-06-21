@@ -9,22 +9,24 @@
                 <serie>xy</serie>
                 <serie>yx</serie>
             </filter>
-            <filter id="3">
+            <filter id="2">
                 <serie>xy</serie>
-                <serie>xx</serie>
                 <serie>yy</serie>
             </filter>
-            <filter id="4">
-                <serie>Hallo</serie>
-                <serie>Its Me</serie>
+            <filter id="3">
+                <serie>Hey</serie>
                 <serie>Mario</serie>
+                <serie>GameOfThrones</serie>
+                <serie>Mario</serie>
+                <serie>Mario</serie>
+                <serie>Marioa</serie>
             </filter>
         </filtercontainer>
         <abos>
             <serien>
+                <serie>1</serie>
                 <serie>4</serie>
                 <serie>5</serie>
-                <serie>Game of Thrones</serie>
             </serien>
         </abos>
     </profil>
