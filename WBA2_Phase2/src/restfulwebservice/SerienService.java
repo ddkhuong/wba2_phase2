@@ -96,6 +96,7 @@ public class SerienService {
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Serien getSerien() throws JAXBException, FileNotFoundException {
+		
 		Serien serien = unmarshalSerien();
 
 		return serien;
@@ -174,7 +175,7 @@ public class SerienService {
 				return Response.ok().build();
 			}
 		}
-		System.out.println("News wurde nicht gefunden. ");
+		System.out.println("Serie wurde nicht gefunden. ");
 		return Response.status(404).build();
 
 	}
@@ -229,9 +230,10 @@ public class SerienService {
 	
 		//Wenn Serien bereits vorhanden ist, dann verändern
 		for (int i = 0; i < s_daten.getSerie().size(); i++) {
+			String id = s_daten.getSerie().get(i).getId();
 			if (serien_id.equals(s_daten.getSerie().get(i).getId())) {
 				
-				String id = s_daten.getSerie().get(i).getId();
+				
 				s.setId(id);
 				s_daten.getSerie().set((Integer.parseInt(id)-1), s);//Vermeidung von IndexOutOfBoundsException
 				

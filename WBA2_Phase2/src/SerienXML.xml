@@ -8,25 +8,22 @@
         <alleStaffeln>
             <staffel id="1">
                 <episode id="1">
-					<nummer>1.1</nummer>
-					<name>Pilot</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>1.1</nummer>
+                    <name>Pilot</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
                 <episode id="2">
-					<nummer>1.2</nummer>
-					<name>Zweite Folge</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>1.2</nummer>
+                    <name>Zweite Folge</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
             </staffel>
             <staffel id="2">
                 <episode id="3">
-					<nummer>2.1</nummer>
-					<name>Zweite Staffel</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>2.1</nummer>
+                    <name>Zweite Staffel</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
             </staffel>
         </alleStaffeln>
         <cast>
@@ -50,26 +47,23 @@
         <alleStaffeln>
             <staffel id="1">
                 <episode id="1">
-					<nummer>1.1</nummer>
-					<name>Pilot</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>1.1</nummer>
+                    <name>Pilot</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
                 <episode id="2">
-					<nummer>1.2</nummer>
-					<name>Zweite Folge</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>1.2</nummer>
+                    <name>Zweite Folge</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
             </staffel>
             <staffel id="2">
-				<episode id="1">
-					<nummer>1.1</nummer>
-					<name>Pilot</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
-			</staffel>
+                <episode id="1">
+                    <nummer>1.1</nummer>
+                    <name>Pilot</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
+            </staffel>
         </alleStaffeln>
         <cast>
             <darsteller id="1">
@@ -85,32 +79,29 @@
         </cast>
     </serie>
     <serie id="3">
-        <name>Prison Break</name>
+        <name>Teletubbies</name>
         <genre>Drama</genre>
         <beschreibung>Michael bricht aus zum zweiten Mal
 		</beschreibung>
         <alleStaffeln>
             <staffel id="1">
                 <episode id="1">
-					<nummer>1.1</nummer>
-					<name>Pilot</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>1.1</nummer>
+                    <name>Pilot</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
                 <episode id="2">
-					<nummer>1.2</nummer>
-					<name>Zweite Folge</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>1.2</nummer>
+                    <name>Zweite Folge</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
             </staffel>
             <staffel id="2">
                 <episode id="3">
-					<nummer>2.1</nummer>
-					<name>Zweite Staffel</name>
-					<datum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-					<episodenbeschreibung>tolle Folge</episodenbeschreibung>
-				</episode>
+                    <nummer>2.1</nummer>
+                    <name>Zweite Staffel</name>
+                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                </episode>
             </staffel>
         </alleStaffeln>
         <cast>

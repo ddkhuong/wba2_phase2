@@ -109,7 +109,7 @@ public class ProfileService {
 	public Profile getProfile() throws JAXBException, FileNotFoundException {
 
 		Profile profil_daten = unmarshalProfil();
-
+		
 		return profil_daten;
 
 	}
@@ -362,6 +362,16 @@ public class ProfileService {
 	}
 
 	
+	/**
+	 * Fügt eine Serie dem Filter hinzu
+	 * 
+	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
+	 * @param filter_id ID des Filters, dem die Serie hinzugefügt werden soll 
+	 * @param serie Serie die hinzugefügt werden soll
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@POST
 	@Path("/{profil_id}/filter/{filter_id}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -394,6 +404,17 @@ public class ProfileService {
 		return Response.status(201).build();
 	}
 	
+	/**
+	 * Löscht eine bestimmte Serie aus dem Filter
+	 * 
+	 * 
+	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
+	 * @param filter_id ID des Filters dem die Serie zugeordnet ist
+	 * @param serien_id ID der Serie, die gelöscht werden soll
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
 	@DELETE
 	@Path("/{profil_id}/filter/{filter_id}/{serien_id}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -516,5 +537,5 @@ public class ProfileService {
 			return Response.status(404).build();
 		}
 	}
-
+	
 }
