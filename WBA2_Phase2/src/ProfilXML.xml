@@ -3,35 +3,95 @@
     <profil id="1">
         <user>Max Mustermann</user>
         <profilbild>MaxMustermann.jpg</profilbild>
-        <beschreibung>Wuuuuuza</beschreibung>
+        <beschreibung>Ich bin toll</beschreibung>
         <filtercontainer>
             <filter id="1">
                 <serie>xy</serie>
                 <serie>yx</serie>
             </filter>
-            <filter id="Troll">
+            <filter id="3">
                 <serie>xy</serie>
+                <serie>xx</serie>
+                <serie>yy</serie>
+            </filter>
+            <filter id="4">
+                <serie>Hallo</serie>
+                <serie>Its Me</serie>
+                <serie>Mario</serie>
             </filter>
         </filtercontainer>
         <abos>
             <serien>
-                <serie>1</serie>
                 <serie>4</serie>
+                <serie>5</serie>
+                <serie>Game of Thrones</serie>
             </serien>
         </abos>
     </profil>
     <profil id="2">
-        <user>Hans Peter</user>
-        <profilbild>MaxMustermann.jpg</profilbild>
+        <user>Hans Werner</user>
+        <profilbild>MaxMustermann2.jpg</profilbild>
         <beschreibung>Cheerio</beschreibung>
         <filtercontainer/>
         <abos/>
     </profil>
     <profil id="3">
         <user>Hans Peter</user>
-        <profilbild>MaxMustermann.jpg</profilbild>
+        <profilbild>MaxMustermann3.jpg</profilbild>
         <beschreibung>Cheerio</beschreibung>
         <filtercontainer/>
         <abos/>
+    </profil>
+    <profil id="4">
+        <user>steve</user>
+        <profilbild>MaxMustermann4.jpg</profilbild>
+        <beschreibung>Ich bin toller</beschreibung>
+        <filtercontainer>
+            <filter id="GoT Dexter">
+                <serie>GoT</serie>
+                <serie>Dexter</serie>
+            </filter>
+            <filter id="Weitere">
+                <serie>GoT</serie>
+                <serie>Naruto</serie>
+                <serie>How I Met Your Mother</serie>
+            </filter>
+            <filter id="noch">
+                <serie>GoT</serie>
+                <serie>Naruto</serie>
+                <serie>How I Met Your Mother</serie>
+            </filter>
+            <filter id="einer">
+                <serie>GoT</serie>
+                <serie>Naruto</serie>
+                <serie>How I Met Your Mother</serie>
+            </filter>
+        </filtercontainer>
+        <abos>
+            <serien/>
+        </abos>
+    </profil>
+    <profil id="5">
+        <user>steve</user>
+        <profilbild>MaxMustermann2.jpg</profilbild>
+        <beschreibung>Ich bin tollerx</beschreibung>
+        <filtercontainer>
+            <filter id="GoT Dexter">
+                <serie>GoT</serie>
+                <serie>GoT</serie>
+            </filter>
+            <filter id="Weitere">
+                <serie>GoT</serie>
+                <serie>Naruto</serie>
+                <serie>How I Met</serie>
+            </filter>
+            <filter id="Weit">
+                <serie>Go</serie>
+                <serie>Narto</serie>
+            </filter>
+        </filtercontainer>
+        <abos>
+            <serien/>
+        </abos>
     </profil>
 </profile>

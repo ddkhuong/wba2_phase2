@@ -525,7 +525,7 @@ public class ProfileService {
 		Serien s_list = getAbonnierteSerien(profil_id);
 		
 		//Vermeidung von IndexOutOfBoundsException
-		//int s_id = (Integer.parseInt(serien_id) - 1);
+	
 		int p_id = (Integer.parseInt(profil_id) - 1);
 
 		for(int i=0; i<s_list.getSerie().size(); i++){
