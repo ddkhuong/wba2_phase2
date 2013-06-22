@@ -262,23 +262,23 @@ public class ProfileService {
 	 * Ausgabe des mit der ID "filter_id" versehenen Filters.
 	 * 
 	 * @param profil_id ID des Profils, dem die Filter zugeordnet sind
-	 * @param filter_id ID des auszugebenen Filter-Objekts
+	 * @param filtername Name des auszugebenen Filter-Objekts
 	 * @return angeforderter Filter
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
 	@GET
-	@Path("/{profil_id}/filter/{filter_id}")
+	@Path("/{profil_id}/filter/{filtername}")
 	@Produces(MediaType.APPLICATION_XML)
 	public Filter getFilter(@PathParam("profil_id") String profil_id,
-			@PathParam("filter_id") String filter_id) throws JAXBException,
+			@PathParam("filtername") String filtername) throws JAXBException,
 			FileNotFoundException {
 
 		Filtercontainer f_list = getAllFilter(profil_id);
 		Filter f = null;
 
 		for (int i = 0; i < f_list.getFilter().size(); i++) {
-			if (f_list.getFilter().get(i).getId().equals(filter_id)) {
+			if (f_list.getFilter().get(i).getId().equals(filtername)) {
 				f = f_list.getFilter().get(i);
 			}
 		}
@@ -302,23 +302,17 @@ public class ProfileService {
 	@Path("/{profil_id}/filter/")
 	@Produces(MediaType.APPLICATION_XML)
 	public Response postFilter(@PathParam("profil_id") String profil_id,
+			@QueryParam("filtername") String filtername,
 			Filter f) throws JAXBException, FileNotFoundException {
 
 		Profile p_daten = unmarshalProfil();
-		Filtercontainer f_list = getAllFilter(profil_id);
-		int size = f_list.getFilter().size();
+		
+		
 		//Vermeidung von IndexOutOfBoundsException
 		int p_id = (Integer.parseInt(profil_id) - 1);
 
-		int lastid = Integer.parseInt(f_list.getFilter().get(size - 1).getId());
-
-		if (size > 0) {
-			lastid++; //ID, die dem neuen Objekt übergeben wird
-		} else {
-			lastid = 0;
-		}
-
-		f.setId(String.valueOf(lastid));
+		
+		f.setId(filtername);
 		p_daten.getProfil().get(p_id).getFiltercontainer().getFilter().add(f);
 		marshalProfil(p_daten);
 
@@ -329,17 +323,17 @@ public class ProfileService {
 	 * Löscht den Filter mit der übergebenen ID "filter_id".
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
-	 * @param filter_id ID des zu löschenden Filter-Objekts
+	 * @param filtername Name des zu löschenden Filter-Objekts
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
 	@DELETE
-	@Path("/{profil_id}/filter/{filter_id}")
+	@Path("/{profil_id}/filter/{filtername}")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Response deleteFilter(@PathParam("profil_id") String profil_id,
-			@PathParam("filter_id") String filter_id) throws JAXBException,
+			@PathParam("filtername") String filtername) throws JAXBException,
 			FileNotFoundException {
 
 		Profile profil_daten = unmarshalProfil();
@@ -349,7 +343,7 @@ public class ProfileService {
 		
 		for (int i = 0; i < f_list.getFilter().size(); i++) {
 			
-			if (filter_id.equals(f_list.getFilter().get(i).getId())) {
+			if (filtername.equals(f_list.getFilter().get(i).getId())) {
 				
 				profil_daten.getProfil().get(p_id).getFiltercontainer().getFilter().remove(i);
 				marshalProfil(profil_daten);
@@ -366,19 +360,19 @@ public class ProfileService {
 	 * Fügt eine Serie dem Filter hinzu
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
-	 * @param filter_id ID des Filters, dem die Serie hinzugefügt werden soll 
-	 * @param serie Serie die hinzugefügt werden soll
+	 * @param filtername Name des Filters, dem die Serie hinzugefügt werden soll 
+	 * @param serienname Serie die hinzugefügt werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
 	@POST
-	@Path("/{profil_id}/filter/{filter_id}")
+	@Path("/{profil_id}/filter/{filtername}")
 	@Produces(MediaType.APPLICATION_XML)
 	public Response postSerieInFilter(
 			@PathParam("profil_id") String profil_id,
-			@PathParam("filter_id") String filter_id,
-			@QueryParam("serie") String serie) throws JAXBException,
+			@PathParam("filtername") String filtername,
+			@QueryParam("serienname") String serienname) throws JAXBException,
 			FileNotFoundException {
 
 		Profile p_daten = unmarshalProfil();
@@ -387,13 +381,11 @@ public class ProfileService {
 		
 		//Vermeidung von IndexOutOfBoundsException
 		int p_id = (Integer.parseInt(profil_id) - 1);
-		int f_id = (Integer.parseInt(filter_id) - 1);
 		
-		for(int i = 0; i < f_list.getFilter().size(); i++) {
-			
-			if ( filter_id.equals(f_list.getFilter().get(f_id).getId())) {
+		for(int i = 0; i < f_list.getFilter().size(); i++) {			
+			if ( filtername.equals(f_list.getFilter().get(i).getId())) {
 				
-				p_daten.getProfil().get(p_id).getFiltercontainer().getFilter().get(f_id).getSerie().add(serie);
+				p_daten.getProfil().get(p_id).getFiltercontainer().getFilter().get(i).getSerie().add(serienname);
 				break;
 				}
 			
@@ -410,37 +402,49 @@ public class ProfileService {
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
 	 * @param filter_id ID des Filters dem die Serie zugeordnet ist
-	 * @param serien_id ID der Serie, die gelöscht werden soll
+	 * @param serienname Name der Serie, die gelöscht werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
 	@DELETE
-	@Path("/{profil_id}/filter/{filter_id}/{serien_id}")
+	@Path("/{profil_id}/filter/{filtername}/{serienname}")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Response deleteSerieInFilter(
 			@PathParam("profil_id") String profil_id,
-			@PathParam("filter_id") String filter_id,
-			@PathParam("serien_id") String serien_id) throws JAXBException,
+			@PathParam("filtername") String filtername,
+			@PathParam("serienname") String serienname) throws JAXBException,
 			FileNotFoundException {
+		
 
+		int p_id = (Integer.parseInt(profil_id) - 1);
+
+		
 		Profile profil_daten = unmarshalProfil();
 		Filtercontainer f_list = getAllFilter(profil_id);
 		
-		//Vermeidung von IndexOutOfBoundsException
-		int s_id = (Integer.parseInt(serien_id) - 1);
-		int p_id = (Integer.parseInt(profil_id) - 1);
-		int f_id = (Integer.parseInt(filter_id) - 1);
-
 		
-		if (f_list != null && s_id <= f_list.getFilter().get(f_id).getSerie().size()) {
+	
+		for(int i=0; i<f_list.getFilter().size(); i++){
 			
-			profil_daten.getProfil().get(p_id).getFiltercontainer().getFilter().get(f_id).getSerie().remove(s_id);
-
+			if (filtername.equals(f_list.getFilter().get(i).getId())){
+				
+				List<String> s_list = f_list.getFilter().get(i).getSerie();
+				
+				for(int j=0; j<s_list.size(); j++){
+					
+					if(serienname.equals(s_list.get(j))){
+						
+						profil_daten.getProfil().get(p_id).getFiltercontainer().getFilter().get(i).getSerie().remove(j);
+					
+					
 			marshalProfil(profil_daten);
 			System.out.println("Serie wurde aus Filter gelöscht");
 			return Response.ok().build();
+					}
+				}
+			}
 		}
 
 	
@@ -485,7 +489,7 @@ public class ProfileService {
 	@Produces(MediaType.APPLICATION_XML)
 	public Response postAbonnierteSerie(
 			@PathParam("profil_id") String profil_id,
-			@QueryParam("serie") String serie) throws JAXBException,
+			@QueryParam("serienname") String serienname) throws JAXBException,
 			FileNotFoundException {
 
 		Profile p_daten = unmarshalProfil();
@@ -493,7 +497,7 @@ public class ProfileService {
 		//Vermeidung von IndexOutOfBoundsException
 		int p_id = (Integer.parseInt(profil_id) - 1);
 
-		p_daten.getProfil().get(p_id).getAbos().getSerien().getSerie().add(serie);
+		p_daten.getProfil().get(p_id).getAbos().getSerien().getSerie().add(serienname);
 		marshalProfil(p_daten);
 
 		return Response.status(201).build();
@@ -514,28 +518,31 @@ public class ProfileService {
 	@Produces(MediaType.APPLICATION_XML)
 	public Response deleteAbonnierteSerie(
 			@PathParam("profil_id") String profil_id,
-			@QueryParam("serien_id") String serien_id) throws JAXBException,
+			@QueryParam("serienname") String serienname) throws JAXBException,
 			FileNotFoundException {
 
 		Profile profil_daten = unmarshalProfil();
 		Serien s_list = getAbonnierteSerien(profil_id);
 		
 		//Vermeidung von IndexOutOfBoundsException
-		int s_id = (Integer.parseInt(serien_id) - 1);
+		//int s_id = (Integer.parseInt(serien_id) - 1);
 		int p_id = (Integer.parseInt(profil_id) - 1);
 
-		if (s_list != null && s_id <= s_list.getSerie().size()) {
-			profil_daten.getProfil().get(p_id).getAbos().getSerien().getSerie().remove(s_id);
+		for(int i=0; i<s_list.getSerie().size(); i++){
+			if(serienname.equals(s_list.getSerie().get(i))){
+			profil_daten.getProfil().get(p_id).getAbos().getSerien().getSerie().remove(i);
 
 			marshalProfil(profil_daten);
 			System.out.println("Abonnierte Serie wurde gelöscht");
 			return Response.ok().build();
 		}	
-
-		else {
+		
+		}	
 			System.out.println("Serie wurde nicht gefunden.");
 			return Response.status(404).build();
 		}
-	}
+		
+			
+	
 	
 }
