@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
     
 private String username;
 private String password;
-private Xmpptest xmpp ;
+private XMPPController xmpp ;
 private Hauptmenue haupt;
     /**
      * Creates new form Login
@@ -111,14 +111,20 @@ private Hauptmenue haupt;
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        xmpp= new Xmpptest();
-        xmpp.connect(usernameTextfield, passwordTextfield);
+        
+        xmpp= new XMPPController();
+        if(xmpp.connect(usernameTextfield, passwordTextfield))
+        {
         haupt=new Hauptmenue(xmpp,this);
         this.setVisible(false);
+        }
+        else{
+            System.out.println("Fehler beim einloggen");
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void passwordTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextfieldActionPerformed
-        xmpp= new Xmpptest();
+        xmpp= new XMPPController();
         xmpp.connect(usernameTextfield, passwordTextfield);
         haupt=new Hauptmenue(xmpp,this);
         this.setVisible(false);

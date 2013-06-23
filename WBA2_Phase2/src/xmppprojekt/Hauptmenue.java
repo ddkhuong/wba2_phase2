@@ -20,14 +20,14 @@ public class Hauptmenue extends javax.swing.JFrame {
     /**
      * Creates new form Hauptmenue
      */
-    private Xmpptest xmpp;
+    private XMPPController xmpp;
     private Login login;
     private Abos abos;
     private Filter filter;
-    private Serie serie;
+    private SerieFenster serie;
     private Profil profil;
     private SerieInfo serieInfo;
-    public Hauptmenue(Xmpptest xmpp, Login login) {
+    public Hauptmenue(XMPPController xmpp, Login login) {
         this.login = login;
         this.xmpp = xmpp;
         initComponents();
@@ -35,9 +35,11 @@ public class Hauptmenue extends javax.swing.JFrame {
 
             filterButton1.setText(xmpp.getFilterName(0));
             filterButton2.setText(xmpp.getFilterName(1));
-
-                
+            nachrichtenListe.setModel(xmpp.refreshNachrichtenList());
+            xmpp.gibNachrichtenListe(nachrichtenListe);
+          
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +58,7 @@ public class Hauptmenue extends javax.swing.JFrame {
         editProfilButton = new javax.swing.JButton();
         serienInfosButton = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        filterListe = new javax.swing.JList();
+        nachrichtenListe = new javax.swing.JList();
         filterButton1 = new javax.swing.JButton();
         filterButton2 = new javax.swing.JButton();
 
@@ -106,16 +108,26 @@ public class Hauptmenue extends javax.swing.JFrame {
             }
         });
 
-        filterListe.setModel(new javax.swing.AbstractListModel() {
+        nachrichtenListe.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane6.setViewportView(filterListe);
+        jScrollPane6.setViewportView(nachrichtenListe);
 
         filterButton1.setText("Filter1");
+        filterButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterButton1ActionPerformed(evt);
+            }
+        });
 
         filterButton2.setText("Filter2");
+        filterButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,7 +203,7 @@ public class Hauptmenue extends javax.swing.JFrame {
 
     private void editSerienButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSerienButtonActionPerformed
         this.setVisible(false);
-        serie = new Serie(this, xmpp);
+        serie = new SerieFenster(this, xmpp);
     }//GEN-LAST:event_editSerienButtonActionPerformed
 
     private void editProfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfilButtonActionPerformed
@@ -204,6 +216,16 @@ public class Hauptmenue extends javax.swing.JFrame {
         this.setVisible(false);
         serieInfo = new SerieInfo(this, xmpp);
     }//GEN-LAST:event_serienInfosButtonActionPerformed
+
+    private void filterButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButton1ActionPerformed
+        
+        xmpp.filter1Button(xmpp.getFilterName(0));
+    }//GEN-LAST:event_filterButton1ActionPerformed
+
+    private void filterButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButton2ActionPerformed
+       xmpp.filter1Button(xmpp.getFilterName(1));
+    }//GEN-LAST:event_filterButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abmeldenButton;
     private javax.swing.JButton editAbosButton;
@@ -212,9 +234,9 @@ public class Hauptmenue extends javax.swing.JFrame {
     private javax.swing.JButton editSerienButton;
     private javax.swing.JButton filterButton1;
     private javax.swing.JButton filterButton2;
-    private javax.swing.JList filterListe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JList nachrichtenListe;
     private javax.swing.JButton serienInfosButton;
     // End of variables declaration//GEN-END:variables
 }

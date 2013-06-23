@@ -142,7 +142,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="filterListe">
+        <Component class="javax.swing.JList" name="nachrichtenListe">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -161,11 +161,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="filterButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter2"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterButton2ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

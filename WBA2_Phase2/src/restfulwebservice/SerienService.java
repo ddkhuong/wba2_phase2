@@ -22,6 +22,7 @@ import javax.xml.bind.Unmarshaller;
 
 import resources.Serie.AlleStaffeln;
 import resources.Serie.Cast;
+import resources.Serie.Darsteller;
 import resources.Serie.Episode;
 import resources.Serie.Serie;
 import resources.Serie.Serien;
@@ -49,7 +50,7 @@ public class SerienService {
 	}
 
 	/**
-	 * Marshalt die veränderte XML-Datei "SerienXML.xml".
+	 * Marshalt die verï¿½nderte XML-Datei "SerienXML.xml".
 	 * 
 	 * @param s Ein Objekt der Klasse Serien
 	 * @throws JAXBException
@@ -66,9 +67,9 @@ public class SerienService {
 	}
 
 	/**
-	 * Nimmt die ID des letzten Objekts "Serie" in der Liste und erhöht diese um eins.
+	 * Nimmt die ID des letzten Objekts "Serie" in der Liste und erhï¿½ht diese um eins.
 	 * 
-	 * @return gibt die um eins erhöhte ID zurück
+	 * @return gibt die um eins erhï¿½hte ID zurï¿½ck
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -85,7 +86,7 @@ public class SerienService {
 	}
 
 	/**
-	 * Gibt eine Liste aller Serien-Objekte zurück
+	 * Gibt eine Liste aller Serien-Objekte zurï¿½ck
 	 * 
 	 * @return Liste aller Serien
 	 * @throws JAXBException
@@ -104,7 +105,7 @@ public class SerienService {
 	}
 
 	/**
-	 * Ausgabe der Serie mit dem übergebenen Namen
+	 * Ausgabe der Serie mit dem ï¿½bergebenen Namen
 	 * 
 	 * @param serienname Name der auszugebenen Serie
 	 * @return angeforderte Serie
@@ -129,10 +130,10 @@ public class SerienService {
 	}
 
 	/**
-	 * Ausgabe der ID der ausgewählten Serie
+	 * Ausgabe der ID der ausgewï¿½hlten Serie
 	 * 
-	 * @param serienname Name der auszuwählenden Serie
-	 * @return ID der ausgewählten Serie
+	 * @param serienname Name der auszuwï¿½hlenden Serie
+	 * @return ID der ausgewï¿½hlten Serie
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -150,9 +151,9 @@ public class SerienService {
 	}
 
 	/**
-	 * Löscht die Serie mit übergebenen ID
+	 * Lï¿½scht die Serie mit ï¿½bergebenen ID
 	 * 
-	 * @param serienname Name der Serie, die gelöscht werden soll
+	 * @param serienname Name der Serie, die gelï¿½scht werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -171,7 +172,7 @@ public class SerienService {
 				
 				s_daten.getSerie().remove(i);
 				marshalSerien(s_daten);
-				System.out.println("Serie wurde gelöscht");
+				System.out.println("Serie wurde gelï¿½scht");
 				return Response.ok().build();
 			}
 		}
@@ -181,10 +182,10 @@ public class SerienService {
 	}
 
 	/**
-	 * Erstellt eine neue Serie und fügt diese zur vorhandenen Liste hinzu,
-	 * die ID ist dabei die des letzten Objekts in der Liste um eins erhöht.
+	 * Erstellt eine neue Serie und fï¿½gt diese zur vorhandenen Liste hinzu,
+	 * die ID ist dabei die des letzten Objekts in der Liste um eins erhï¿½ht.
 	 * 
-	 * Das Objekt s muss in der XML-Struktur der Serie übergeben werden.
+	 * Das Objekt s muss in der XML-Struktur der Serie ï¿½bergeben werden.
 	 * 
 	 * @param s Serien-Objekt in XML-Struktur
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
@@ -199,7 +200,7 @@ public class SerienService {
 
 		Serien s_daten = unmarshalSerien();
 
-		s.setId(nextIdSerie());
+		
 
 		s_daten.getSerie().add(s);
 		marshalSerien(s_daten);
@@ -209,45 +210,38 @@ public class SerienService {
 	}
 
 	/**
-	 * Verändert eine bereits vorhandene Serie oder fügt sie hinzu, wenn 
+	 * Verï¿½ndert eine bereits vorhandene Serie oder fï¿½gt sie hinzu, wenn 
 	 * sie noch nicht vorhanden ist.
 	 * 
-	 * @param serien_id ID der zu verändernden Serie
+	 * @param serienname Name der zu verï¿½ndernden Serie
 	 * @param s Serien-Objekt in XML-Struktur
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
 	@PUT
-	@Path("/{serien_id}")
+	@Path("/{serienname}")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public Response putSerie(@PathParam("serien_id") String serien_id, Serie s)
+	public Response putSerie(@PathParam("serienname") String serienname, Serie s)
 			throws JAXBException, FileNotFoundException {
 
 		Serien s_daten = unmarshalSerien();
-		int id_temp = Integer.parseInt(serien_id);
 	
-		//Wenn Serien bereits vorhanden ist, dann verändern
+		
 		for (int i = 0; i < s_daten.getSerie().size(); i++) {
-			String id = s_daten.getSerie().get(i).getId();
-			if (serien_id.equals(s_daten.getSerie().get(i).getId())) {
+			
+			
+			if (serienname.equals(s_daten.getSerie().get(i).getId())) {
 				
-				
-				s.setId(id);
-				s_daten.getSerie().set((Integer.parseInt(id)-1), s);//Vermeidung von IndexOutOfBoundsException
+				System.out.println("if 1");
+				s.setId(serienname);
+				s_daten.getSerie().set(i, s);
 				
 				break;
+				}
 
-			}
-			//Wenn Serie nicht vorhanden ist, dann hinzufügen
-			if (id_temp > s_daten.getSerie().size()) {
-				s.setId(nextIdSerie());
-				s_daten.getSerie().add(s);
-				break;
-			}
-
-		}
+		}	
 
 		marshalSerien(s_daten);
 
@@ -255,7 +249,7 @@ public class SerienService {
 	}
 
 	/**
-	 * Gibt eine Liste aller Staffel-Objekte zurück.
+	 * Gibt eine Liste aller Staffel-Objekte zurï¿½ck.
 	 * 
 	 * @param serie ID der Serie, der die Staffel zugeordnet ist
 	 * @return Liste von Staffel-Objekten
@@ -304,10 +298,10 @@ public class SerienService {
 	}
 
 	/**
-	 * Erstellt eine neue Staffel und fügt diese zur vorhandenen Liste hinzu,
-	 * Die ID ist dabei die des letzten Objekts in der Liste um eins erhöht.
+	 * Erstellt eine neue Staffel und fï¿½gt diese zur vorhandenen Liste hinzu,
+	 * Die ID ist dabei die des letzten Objekts in der Liste um eins erhï¿½ht.
 	 * 
-	 * Das Objekt st muss in der XML-Struktur der Staffel übergeben werden.
+	 * Das Objekt st muss in der XML-Struktur der Staffel ï¿½bergeben werden.
 	 * 
 	 * 
 	 * @param serienname Name der Serie, der die Staffel zugeordnet ist
@@ -324,31 +318,27 @@ public class SerienService {
 			throws JAXBException, FileNotFoundException {
 
 		Serien s_daten = unmarshalSerien();
-		AlleStaffeln st_list = getStaffeln(serienname);
-		int size = st_list.getStaffel().size();
-		int s_id = Integer.parseInt(getSerienID(serienname));
-
-		int lastid = Integer.parseInt(st_list.getStaffel().get(size - 1).getId());
-
-		if (size > 0) {
-			lastid++;
-		} else {
-			lastid = 0;
-		}
-
-		st.setId(String.valueOf(lastid));
-		s_daten.getSerie().get(s_id - 1).getAlleStaffeln().getStaffel().add(st);//(s_id-1) zur Vermeidung von IndexOutOfBoundsException
 		
+		
+
+		
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+		s_daten.getSerie().get(i).getAlleStaffeln().getStaffel().add(st);
+			}
+		}
 		marshalSerien(s_daten);
 
 		return Response.status(201).build();
+		
+		
 	}
-
+	
 	/**
-	 * Löscht die Staffel mit der übergebenen ID
+	 * Lï¿½scht die Staffel mit der ï¿½bergebenen ID
 	 * 
 	 * @param serienname Serie, der die Staffel zugeordnet ist
-	 * @param staffel_id ID der zu löschenden Staffel
+	 * @param staffel_id ID der zu lï¿½schenden Staffel
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -363,70 +353,27 @@ public class SerienService {
 
 		Serien s_daten = unmarshalSerien();
 		AlleStaffeln st_list = getStaffeln(serienname);
-		int s_id = Integer.parseInt(getSerienID(serienname));
+		
 
-		for (int i = 0; i < st_list.getStaffel().size(); i++) {
-			
-			if (staffel_id.equals(st_list.getStaffel().get(i).getId())) {
+
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+				for (int j = 0; j < st_list.getStaffel().size(); j++) {			
+					if (staffel_id.equals(st_list.getStaffel().get(j).getId())) {
 				
-				s_daten.getSerie().get(s_id - 1).getAlleStaffeln().getStaffel().remove(i);
+				s_daten.getSerie().get(i).getAlleStaffeln().getStaffel().remove(j);
 				marshalSerien(s_daten);
-				System.out.println("Staffel wurde gelöscht");
+				System.out.println("Staffel wurde gelï¿½scht");
 				return Response.ok().build();
+					}
+				}
 			}
 		}
 		System.out.println("Staffel wurde nicht gefunden. ");
 		return Response.status(404).build();
 	}
 
-	/**
-	 * Verändert eine bereits vorhandene Staffel oder fügt diese hinzu wenn 
-	 * sie noch nicht vorhanden ist.
-	 * 
-	 * @param serienname Name der Serie, der die Staffel zugeordnet ist
-	 * @param staffel_id ID der zu verändernden Staffel
-	 * @param st Staffel-Objekt in XML-Struktur
-	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
-	 * @throws JAXBException
-	 * @throws FileNotFoundException
-	 */
-	@PUT
-	@Path("/{serienname}/staffel/{staffel_id}")
-	@Consumes(MediaType.APPLICATION_XML)
-	@Produces(MediaType.APPLICATION_XML)
-	public Response putStaffel(@PathParam("serienname") String serienname,
-			@PathParam("staffel_id") String staffel_id, Staffel st)
-			throws JAXBException, FileNotFoundException {
-
-		Serien s_daten = unmarshalSerien();
-		AlleStaffeln s_list = getStaffeln(serienname);
-		int id_temp = Integer.parseInt(getSerienID(serienname));
-		String s_id = getSerienID(serienname);
-
-		//Wenn Staffel vorhanden, dann verändern
-		for (int i = 0; i < s_list.getStaffel().size(); i++) {
-			if (s_id.equals(s_list.getStaffel().get(i).getId())) {
-
-				String id = s_list.getStaffel().get(i).getId();
-				st.setId(id);
-				s_daten.getSerie().get(i).getAlleStaffeln().getStaffel().set((Integer.parseInt(id) - 1), st); // Vermeidung von IndexOutOfBoundsException
-				break;
-
-			}
-			//Wenn Staffel nicht vorhanden, dann hinzufügen
-			if (id_temp > s_list.getStaffel().size()) {
-				st.setId(nextIdSerie());
-				s_daten.getSerie().get(i).getAlleStaffeln().getStaffel()
-						.add(st);
-				break;
-			}
-		}
-
-		marshalSerien(s_daten);
-
-		return Response.ok().build();
-	}
-
+	
 	/**
 	 * Ausgabe der mit der ID "episoden_id" versehenen Episode.
 	 * 
@@ -438,27 +385,34 @@ public class SerienService {
 	 * @throws FileNotFoundException
 	 */
 	@GET
-	@Path("/{serienname}/staffel/{staffel_id}/episode/{episoden_id}")
+	@Path("/{serienname}/staffel/{staffel_id}/episode/{episodenname}")
 	@Produces(MediaType.APPLICATION_XML)
 	public Episode getEpisode(@PathParam("serienname") String serienname,
 			@PathParam("staffel_id") String staffel_id,
-			@PathParam("episoden_id") String episoden_id) throws JAXBException,
+			@PathParam("episodenname") String episodenname) throws JAXBException,
 			FileNotFoundException {
 		
-		int e_id = (Integer.parseInt(episoden_id)-1);
-		
+				
 		Staffel st = getStaffel(serienname, staffel_id);
-		Episode e = st.getEpisode().get(e_id);
+		Episode e = null;
+		
+		for(int i=0; i<st.getEpisode().size(); i++){
+			if(st.getEpisode().get(i).getId().equals(episodenname)){
+				e = st.getEpisode().get(i);
+				break;
+			}
+		}
+		
 	
 		return e;
 
 	}
 
 	/**
-	 * Erstelle eine neue Episode und fügt diese zur vorhandenen Liste hinzu.
-	 * Die ID ist dabei die des letzten Objekts in der Liste um eins erhöht.
+	 * Erstelle eine neue Episode und fï¿½gt diese zur vorhandenen Liste hinzu.
+	 * Die ID ist dabei die des letzten Objekts in der Liste um eins erhï¿½ht.
 	 * 
-	 * Das Objekt e muss in der XML-Struktur der News übergeben werden.
+	 * Das Objekt e muss in der XML-Struktur der News ï¿½bergeben werden.
 	 * 
 	 * 
 	 * @param serienname Serie, der die Staffel zugeordnet ist
@@ -477,36 +431,36 @@ public class SerienService {
 			throws JAXBException, FileNotFoundException {
 
 		Serien s_daten = unmarshalSerien();
-		int s_id = Integer.parseInt(getSerienID(serienname));
-		int st_id = Integer.parseInt(staffel_id);
+		AlleStaffeln s_list = getStaffeln(serienname);
+		
+		
 
-		List<Episode> st = s_daten.getSerie().get((s_id - 1)).getAlleStaffeln().getStaffel().get((st_id - 1)).getEpisode();
+		
 
-		int size = st.size();
-		int lastid = Integer.parseInt(st.get(size - 1).getId());
-
-		if (size > 0) {
-			lastid++; //ID des neu hinzugefügten Objekts
-		} else {
-			lastid = 0;
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+				for (int j = 0; j < s_list.getStaffel().size(); j++) {
+					String st_id = s_list.getStaffel().get(j).getId();
+					if (st_id.equals(s_list.getStaffel().get(j).getId())) {
+						
+		s_daten.getSerie().get(i).getAlleStaffeln().getStaffel().get((j)).getEpisode().add(e);
+	
+					}
+				}
+			}
 		}
-
-		e.setId(String.valueOf(lastid));
-
-		s_daten.getSerie().get((s_id - 1)).getAlleStaffeln().getStaffel().get((st_id - 1)).getEpisode().add(e);
 		marshalSerien(s_daten);
-
 		return Response.status(201).build();
 
 	}
 
 	/**
-	 * Löscht die Episode mit der übergebenen ID
+	 * Lï¿½scht die Episode mit der ï¿½bergebenen ID
 	 * 
 	 * 
 	 * @param serienname Serie, der die Staffel zugeordnet ist
 	 * @param staffel_id ID der Staffel, der die Episode zugeordnet ist
-	 * @param episoden_id ID der Episode, die gelöscht werden soll
+	 * @param episoden_id ID der Episode, die gelï¿½scht werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -521,27 +475,36 @@ public class SerienService {
 			FileNotFoundException {
 
 		Serien s_daten = unmarshalSerien();
-		int s_id = Integer.parseInt(getSerienID(serienname));
-		int st_id = Integer.parseInt(staffel_id);
+		AlleStaffeln st_list = getStaffeln(serienname);
+		
+		
 
-		List<Episode> st_list = s_daten.getSerie().get((s_id - 1))
-				.getAlleStaffeln().getStaffel().get((st_id - 1)).getEpisode();
-
-		for (int i = 0; i < st_list.size(); i++) {
-			if (episoden_id.equals(st_list.get(i).getId())) {
-				s_daten.getSerie().get((s_id - 1)).getAlleStaffeln().getStaffel().get((st_id - 1)).getEpisode().remove(i);
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+				for (int j = 0; j < st_list.getStaffel().size(); j++) {
+					String st_id = st_list.getStaffel().get(j).getId();
+					if (st_id.equals(st_list.getStaffel().get(j).getId())) {
+						for(int k=0; k<st_list.getStaffel().get(j).getEpisode().size(); k++){
+							if(episoden_id.equals(st_list.getStaffel().get(j).getEpisode().get(k).getId())){
+					
+						
+					
+				s_daten.getSerie().get(i).getAlleStaffeln().getStaffel().get(j).getEpisode().remove(k);
 				marshalSerien(s_daten);
-				System.out.println("Episode wurde gelöscht");
+				System.out.println("Episode wurde gelï¿½scht");
 				return Response.ok().build();
+								}
+							}
+						}
+				}
 			}
-
 		}
 		System.out.println("Episode wurde nicht gefunden. ");
 		return Response.status(404).build();
 	}
 
 	/**
-	 * Gibt eine Liste aller Darsteller einer Serie zurück
+	 * Gibt eine Liste aller Darsteller einer Serie zurï¿½ck
 	 * 
 	 * @param serienname Serie, der der Cast zugeordnet wird
 	 * @return Cast-Objekt der Serie
@@ -561,7 +524,7 @@ public class SerienService {
 	}
 
 	/**
-	 * Verändert den bereits vorhandenen Cast.
+	 * Verï¿½ndert den bereits vorhandenen Cast.
 	 * 
 	 * @param serienname Serie, der der Cast zugeordnet ist
 	 * @param c Cast-Objekt in XML-Struktur
@@ -577,14 +540,83 @@ public class SerienService {
 			throws JAXBException, FileNotFoundException {
 
 		Serien s_daten = unmarshalSerien();
-		int s_id = Integer.parseInt(getSerienID(serienname));
-
-		s_daten.getSerie().get((s_id - 1)).setCast(c);
-
+		
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+				
+					s_daten.getSerie().get(i).setCast(c);
+			}
+		}
 		marshalSerien(s_daten);
 
 		return Response.ok().build();
 
 	}
+	
+	/**
+	 * @param serienname
+	 * @param d
+	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
+	@POST
+	@Path("/{serienname}/cast")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public Response postCastDarsteller(@PathParam("serienname") String serienname, Darsteller d)
+			throws JAXBException, FileNotFoundException {
+		
+		Serien s_daten = unmarshalSerien();
+		Cast c = getCast(serienname);
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			int d_id = c.getDarsteller().size();
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+				d.setId(String.valueOf(d_id));
+				s_daten.getSerie().get(i).getCast().getDarsteller().add(d);
+			}
+		}
+		marshalSerien(s_daten);
+		return Response.status(201).build();
+	}
+	
+	/**
+	 * Lï¿½scht einen Darsteller aus dem Cast
+	 * 
+	 * @param serienname Serie, dem der Cast angehï¿½rt
+	 * @param darstellername Darsteller, der gelï¿½scht werden soll 
+	 * @return tatus-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
+	 * @throws JAXBException
+	 * @throws FileNotFoundException
+	 */
+	@DELETE
+	@Path("/{serienname}/cast/{darstellername}")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public Response deleteCastDarsteller(@PathParam("serienname") String serienname,
+			@PathParam("darstellername") String darstellername) throws JAXBException, FileNotFoundException{
+		
+		Serien s_daten = unmarshalSerien();
+		Cast c = getCast(serienname);
+		
 
+
+		for(int i=0; i<s_daten.getSerie().size(); i++){
+			if(serienname.equals(s_daten.getSerie().get(i).getId())){
+				for (int j = 0; j < c.getDarsteller().size(); j++) {			
+					if (darstellername.equals(c.getDarsteller().get(j).getId())) {
+				
+				s_daten.getSerie().get(i).getCast().getDarsteller().remove(j);
+				marshalSerien(s_daten);
+				System.out.println("Darsteller wurde gelï¿½scht");
+				return Response.ok().build();
+					}
+				}
+			}
+		}
+		System.out.println("Darsteller wurde nicht gefunden. ");
+		return Response.status(404).build();
+	}
+		
+	
 }

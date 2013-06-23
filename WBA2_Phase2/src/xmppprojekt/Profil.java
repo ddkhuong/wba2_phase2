@@ -16,8 +16,8 @@ public class Profil extends javax.swing.JFrame {
      * Creates new form Profil
      */
    private Hauptmenue haupt;
-   private Xmpptest xmpp;
-    public Profil(Hauptmenue haupt, Xmpptest xmpp) {
+   private XMPPController xmpp;
+    public Profil(Hauptmenue haupt, XMPPController xmpp) {
         this.haupt = haupt;
         this.xmpp = xmpp;
         initComponents();

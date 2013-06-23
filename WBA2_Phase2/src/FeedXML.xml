@@ -2,14 +2,14 @@
 <nachrichten>
     <feed>
         <news id="1">
-            <serienname>XY</serienname>
-            <artikel url="http://www.serienjunkies.de/news/arrow-beliebte-figur-feldeinsatz-48838.html"></artikel>
+            <serienname>How I Met Your Mother</serienname>
+            <artikel url="http://www.beispiel.html"></artikel>
             <titel>Arrow: Beliebte Figur bald im Feldeinsatz</titel>
             <beschreibung>Bisher war in der The CW-Superheldenserie Arrow
 			 die Action meist den Männern vorbehalten, nun darf aber bald auch
 			das weibliche Mitglied von Team Arrow auf eine eigene Missionen aufbrechen.
 			</beschreibung>
-            <bild url="http://n-cdn.serienjunkies.de/p/48838.jpg"></bild>
+            <bild url="http://beispiel.jpg"></bild>
             <kommentare>
                 <kommentar id="1">
                     <autor>Frauke Mustermann</autor>
@@ -17,38 +17,39 @@
                 </kommentar>
                 <kommentar id="2">
                     <autor>Batman</autor>
-                    <inhalt>I'm Batman</inhalt>
+                    <inhalt>First</inhalt>
                 </kommentar>
                 <kommentar id="3">
                     <autor>Batman</autor>
-                    <inhalt>I'm Batman</inhalt>
+                    <inhalt>Seconde</inhalt>
                 </kommentar>
                 <kommentar id="4">
                     <autor>Batman</autor>
                     <inhalt>I'm Batman</inhalt>
                 </kommentar>
                 <kommentar id="5">
-                    <autor>Undertaker</autor>
-                    <inhalt>Test Inhal3t</inhalt>
+                    <autor>Max Muster</autor>
+                    <inhalt>Hallo Frauke Mustermann</inhalt>
                 </kommentar>
             </kommentare>
         </news>
         <news id="2">
-            <artikel url="http://www.serienjunkies.de/news/play-day-staffel-big-49059.html"></artikel>
-            <titel>Play By Day: SyFy setzt 4. Staffel von Warehouse 13 fort</titel>
+            <serienname>Dexter</serienname>
+            <artikel url="http://www.beispiel.html"></artikel>
+            <titel>Dexter: SyFy setzt 4. Staffel von Warehouse 13 fort</titel>
             <beschreibung>Das Warten hat ein Ende: Nach einer halbjährigen Pause
 			 setzt der US-Sender SyFy heute die vierte Staffel seiner Sci-Fi-Dramedy Warehouse 13 fort.
 			  Zehn neue Episoden gesellen sich zu den bislang ausgestrahlten.
 			</beschreibung>
-            <bild url="http://n-cdn.serienjunkies.de/p/49060.jpg"></bild>
+            <bild url="http://beispiel.jpg"></bild>
             <kommentare>
                 <kommentar id="1">
                     <autor>Max Mustermann</autor>
-                    <inhalt>Test Inhal3t</inhalt>
+                    <inhalt>Test Inhalt</inhalt>
                 </kommentar>
                 <kommentar id="2">
                     <autor>Frauke Mustermann</autor>
-                    <inhalt>Anderer Inhalt2</inhalt>
+                    <inhalt>Anderer Inhalt</inhalt>
                 </kommentar>
                 <kommentar id="3">
                     <autor>Batman</autor>
@@ -56,21 +57,29 @@
                 </kommentar>
                 <kommentar id="4">
                     <autor>Max Mustermann</autor>
-                    <inhalt>Test Inhal3t</inhalt>
+                    <inhalt>Anderer Inhalt zwei</inhalt>
                 </kommentar>
                 <kommentar id="5">
-                    <autor>Undertaker</autor>
-                    <inhalt>Test Inhal3t</inhalt>
-                </kommentar>
-                <kommentar id="6">
-                    <autor>Undertaker</autor>
-                    <inhalt>Test Inhal3t</inhalt>
-                </kommentar>
-                <kommentar id="7">
-                    <autor>Undertaker</autor>
-                    <inhalt>Test Inhal3t</inhalt>
+                    <autor>Ben</autor>
+                    <inhalt>Hallo</inhalt>
                 </kommentar>
             </kommentare>
+        </news>
+        <news id="3">
+            <serienname>Dexter</serienname>
+            <titel>Dexter: hallo ich bin dexter</titel>
+        </news>
+        <news id="4">
+            <serienname>Heroes</serienname>
+            <titel>Heroes : Morgen Staffelfinale von Heroes</titel>
+        </news>
+        <news id="5">
+            <serienname>Heroes</serienname>
+            <titel>Heroes : Staffelfinale schlecht</titel>
+        </news>
+        <news id="6">
+            <serienname>Big Bang Theory</serienname>
+            <titel>Big Bang Theory : Urkomisch</titel>
         </news>
     </feed>
 </nachrichten>

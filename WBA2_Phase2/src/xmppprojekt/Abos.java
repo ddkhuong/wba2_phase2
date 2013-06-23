@@ -19,9 +19,9 @@ public class Abos extends javax.swing.JFrame {
      * Creates new form Abos
      */
     private Hauptmenue haupt;
-    private Xmpptest xmpp;
+    private XMPPController xmpp;
     public String serienName;
-    public Abos(Hauptmenue haupt,Xmpptest xmpp){
+    public Abos(Hauptmenue haupt,XMPPController xmpp){
         this.xmpp = xmpp;
         this.haupt = haupt;
         initComponents();

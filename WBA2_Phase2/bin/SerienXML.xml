@@ -1,120 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <serien>
-    <serie id="1">
-        <name>Pokemon</name>
-        <genre>Anime</genre>
-        <beschreibung>Pikachu
-		</beschreibung>
-        <alleStaffeln>
-            <staffel id="1">
-                <episode id="1">
-                    <nummer>1.1</nummer>
-                    <name>Pilot</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
-                </episode>
-                <episode id="2">
-                    <nummer>1.2</nummer>
-                    <name>Zweite Folge</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
-                </episode>
-            </staffel>
-            <staffel id="2">
-                <episode id="3">
-                    <nummer>2.1</nummer>
-                    <name>Zweite Staffel</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
-                </episode>
-            </staffel>
-        </alleStaffeln>
-        <cast>
-            <darsteller id="1">
-                <bild url="bsp.jpg"></bild>
-                <name>Chuck Norris</name>
-                <beschreibung>Beispiel Beschreibung</beschreibung>
-            </darsteller>
-            <darsteller id="2">
-                <bild url="bsp2.jpg"></bild>
-                <name>Derp Depp</name>
-                <beschreibung>Beispiel2 Beschreibung</beschreibung>
-            </darsteller>
-        </cast>
-    </serie>
-    <serie id="2">
+    <serie id="Heroes">
         <name>Heroes</name>
         <genre>Drama</genre>
         <beschreibung>Michael bricht aus
 		</beschreibung>
         <alleStaffeln>
             <staffel id="1">
-                <episode id="1">
+                <episode id="Pilot">
                     <nummer>1.1</nummer>
                     <name>Pilot</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                    <episodenbeschreibung>Erste Episode der Serie</episodenbeschreibung>
                 </episode>
-                <episode id="2">
+                <episode id="Zweite Folge">
                     <nummer>1.2</nummer>
                     <name>Zweite Folge</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                    <episodenbeschreibung>Zweite Episode der Serie</episodenbeschreibung>
                 </episode>
             </staffel>
             <staffel id="2">
-                <episode id="1">
-                    <nummer>1.1</nummer>
-                    <name>Pilot</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                <episode id="S2E1">
+                    <nummer>2.1</nummer>
+                    <name>S2E1</name>
+                    <episodenbeschreibung>Erste Episode der Zweiten Staffel</episodenbeschreibung>
                 </episode>
             </staffel>
         </alleStaffeln>
         <cast>
             <darsteller id="1">
                 <bild url="bsp.jpg"></bild>
-                <name>Hans Sarpei</name>
+                <name>Max Mustermann</name>
                 <beschreibung>Beispiel Beschreibung</beschreibung>
             </darsteller>
             <darsteller id="2">
                 <bild url="bsp2.jpg"></bild>
-                <name>Peter Griffin</name>
+                <name>Frauke Mustermann</name>
                 <beschreibung>Beispiel2 Beschreibung</beschreibung>
             </darsteller>
         </cast>
     </serie>
-    <serie id="3">
-        <name>Teletubbies</name>
+    <serie id="Dexter">
+        <name>Dexter</name>
         <genre>Drama</genre>
         <beschreibung>Michael bricht aus zum zweiten Mal
 		</beschreibung>
         <alleStaffeln>
             <staffel id="1">
-                <episode id="1">
+                <episode id="Pilot">
                     <nummer>1.1</nummer>
                     <name>Pilot</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                    <episodenbeschreibung>Erste Episode von Dexter</episodenbeschreibung>
                 </episode>
-                <episode id="2">
+                <episode id="Zweite Folge">
                     <nummer>1.2</nummer>
                     <name>Zweite Folge</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                    <episodenbeschreibung>Die zweite Episode</episodenbeschreibung>
                 </episode>
             </staffel>
             <staffel id="2">
-                <episode id="3">
+                <episode id="Zweite Staffel">
                     <nummer>2.1</nummer>
                     <name>Zweite Staffel</name>
-                    <episodenbeschreibung>tolle Folge</episodenbeschreibung>
+                    <episodenbeschreibung>Die zweite Staffel</episodenbeschreibung>
                 </episode>
             </staffel>
         </alleStaffeln>
         <cast>
             <darsteller id="1">
                 <bild url="bsp.jpg"></bild>
-                <name>Hans Sarpei</name>
+                <name>Peter</name>
                 <beschreibung>Beispiel Beschreibung</beschreibung>
             </darsteller>
             <darsteller id="2">
                 <bild url="bsp2.jpg"></bild>
-                <name>Peter Griffin</name>
-                <beschreibung>Beispiel2 Beschreibung</beschreibung>
+                <name>Rex</name>
+                <beschreibung>Beschreibung des Darstellers</beschreibung>
+            </darsteller>
+            <darsteller id="3">
+                <name>Han Solo</name>
+                <beschreibung>Besondere Beschreibung</beschreibung>
+            </darsteller>
+            <darsteller id="4">
+                <name>Dieter</name>
+                <beschreibung>Andere Beschreibung</beschreibung>
             </darsteller>
         </cast>
+    </serie>
+    <serie id="Big Bang Theory">
+        <name>Big Bang Theory</name>
+        <genre>-kein Genre gewählt-</genre>
+        <alleStaffeln>
+            <staffel id="1">
+                <episode id="Erste Episode">
+                    <nummer>1.1</nummer>
+                    <name>Erste Episode</name>
+                    <episodenbeschreibung>Beschreibung</episodenbeschreibung>
+                </episode>
+                <episode id="Zweite Episode">
+                    <nummer>1.2</nummer>
+                    <name>Zweite Episode</name>
+                    <episodenbeschreibung>Episoden Beschreibung</episodenbeschreibung>
+                </episode>
+            </staffel>
+            <staffel id="2">
+                <episode id="Zweite Staffel">
+                    <nummer>2.1</nummer>
+                    <name>Zweite Staffel</name>
+                    <episodenbeschreibung>Beschreibung Episode</episodenbeschreibung>
+                </episode>
+            </staffel>
+        </alleStaffeln>
+        <cast/>
+    </serie>
+    <serie id="How I Met Your Mother">
+        <name>How I Met Your Mother</name>
+        <genre>-kein Genre gewählt-</genre>
+        <beschreibung>Beschreibung</beschreibung>
+        <alleStaffeln/>
+        <cast/>
     </serie>
 </serien>

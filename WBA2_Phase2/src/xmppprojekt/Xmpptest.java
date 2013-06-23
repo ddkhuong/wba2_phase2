@@ -49,12 +49,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import resources.Nachrichten.Bild;
+import resources.Nachrichten.News;
 import resources.Profil.Filter;
 import resources.Profil.Filtercontainer;
 import resources.Profil.Profil;
 import resources.Profil.Profile;
+import resources.Serie.AlleStaffeln;
+import resources.Serie.Cast;
 import resources.Serie.Darsteller;
 import resources.Serie.Episode;
+import resources.Serie.Serie;
 import resources.Serie.Staffel;
 import restfulwebservice.NachrichtenService;
 import restfulwebservice.ProfileService;
@@ -80,16 +85,22 @@ public class Xmpptest {
     private JList filterListe;
     private JList serienInFilterListe;
     private JList availableSerieList;
+    private JList nachrichtenListe;
     private JTextField usernameTextfield;
     private JTextField serienNameTextfield;
     private JTextField profilbildTextfeld;
     private JTextField nummerTextField;
     private JTextField nameTextField;
     private JTextField staffelTextField;
+    private JTextField filterNameTextfield;
+    private JTextField darstellerNameTextField;
+    private JTextField darstellerBildTextFeld;
+    private JTextField serienBeschreibungTextField;
     private JPasswordField passwordTextfield;
     private JTextArea seriePayloadTextarea;
     private JTextArea profilBeschreibungTextfeld;
     private JTextArea beschreibungTextArea;
+    private JTextArea darstellerBeschreibungTextArea;
     private ArrayList<PayloadItem<SimplePayload>> notifications;
     private ArrayList<LeafNode> serien = new ArrayList<>();
     private Listener listener = new Listener();
@@ -106,6 +117,7 @@ public class Xmpptest {
     DefaultListModel serienInFilterList = new DefaultListModel();
     DefaultListModel darstellerList = new DefaultListModel();
     DefaultListModel episodenList = new DefaultListModel();
+    DefaultListModel nachrichtenList = new DefaultListModel();
     private Hauptmenue haupt;
     private String aktuellerFilter;
 
@@ -179,7 +191,7 @@ public class Xmpptest {
      } */
     // connect mit dem Server
     // textfelder aus dem loginfenster als übergabewerte um den username und das Password zu erhalten
-    public void connect(JTextField usernameTextfield, JPasswordField passwordTextfield) {
+    public boolean connect(JTextField usernameTextfield, JPasswordField passwordTextfield) {
         this.usernameTextfield = usernameTextfield;
         this.passwordTextfield = passwordTextfield;
         try {
@@ -191,8 +203,10 @@ public class Xmpptest {
             roster.setSubscriptionMode(SubscriptionMode.accept_all); // weiß nicht
             System.out.println("Hallo " + username + " Sie haben sich erfolgreich verbunden");
             anAlleAltenAnhaengen(); // listener hinzufügen an alle 
+            return true;
         } catch (XMPPException ex) {
             System.out.println("Fehler beim Einloggen");
+            return false;
         }
     }
     //selbsterklärend
@@ -252,10 +266,12 @@ public class Xmpptest {
     }
     //serie erstellen mit namen aus gegebenem textfeld und liste in die die serie eingetragen wird
 
-    public void createSerie(JTextField serienNameTextfield, JList serienList) {
+    public void createSerie(JTextField serienNameTextfield, JList serienList,JTextField serienBeschreibungTextField) {
         this.serienListe = serienList;
         this.serienNameTextfield = serienNameTextfield;
+        this.serienBeschreibungTextField = serienBeschreibungTextField;
         serienName = serienNameTextfield.getText();
+        String beschreibung = "-keine Beschreibung";
         try {
             mgr.getNode(serienName);
             System.err.println("Serie existiert bereits.");
@@ -267,6 +283,10 @@ public class Xmpptest {
             if ("".equals(serienName)) {  // falls nichts eingegeben wurde
                 System.out.println("Bitte Seriennamen eingeben");
             } else {
+                if(serienBeschreibungTextField.getText().isEmpty()){
+                    System.out.println("Bitte beschreibung eingeben");
+                } else{
+                beschreibung = serienBeschreibungTextField.getText();
                 ConfigureForm form = new ConfigureForm(FormType.submit);
                 form.setAccessModel(AccessModel.open);
                 form.setPublishModel(PublishModel.open);
@@ -276,8 +296,9 @@ public class Xmpptest {
                 form.setSubscribe(true);
                 LeafNode node = (LeafNode) mgr.createNode(serienName, form);
                 serien.add(node);
+                addSerie(serienName,beschreibung);
                 serienListe.setModel(refreshSerienList()); // liste aktualisieren
-
+                }
             }
         } catch (XMPPException e) {
             System.err.println("Fehler beim erstellen der Serie");
@@ -294,6 +315,11 @@ public class Xmpptest {
             try {
                 serienName = serienListe.getSelectedValue().toString();  // ausgewählten wert bekommen
                 mgr.deleteNode(serienName);
+                try {
+                    serienService.deleteSerie(serienName);
+                } catch (        JAXBException | FileNotFoundException ex) {
+                    System.out.println("Rest delete Serie Fehlerhaft");
+                }
                 System.out.println(serienName + " wurde gelöscht");
                 serienListe.setModel(refreshSerienList());  // serienliste aktualisieren
             } catch (XMPPException e) {
@@ -315,11 +341,11 @@ public class Xmpptest {
             try {
                 serienName = serienListe.getSelectedValue().toString();  // wert aus liste
                 node = mgr.getNode(serienName);
-                payloadText = "<publish>" + payloadText + "</payload>";     // damit payload xml entspricht
+                payloadText = "<publish>" + payloadText +"!!"+serienName+ "</publish>";     // damit payload xml entspricht
                 SimplePayload p = new SimplePayload("root", "", payloadText);  // payload erstellen
                 PayloadItem<SimplePayload> item = new PayloadItem<>(null, p); // man könnte auch = new PayloadItem<SimplePayload>(p);
-                node.publish(item);                 // publish
-                //node.send(item);                  // send als alternative aber nicht genommen weil synchron?
+               // node.publish(item);                 // publish
+                node.send(item);                  // send als alternative aber nicht genommen weil synchron?
                 System.out.println("Es wurde gepublished ");
             } catch (XMPPException ex) {
                 System.out.println("Fehler beim Publishen");
@@ -415,7 +441,40 @@ public class Xmpptest {
         }
         return unsubscribeList;  // serienlist model wird zurückgegeben 
     }
-
+    public DefaultListModel refreshNachrichtenList(){
+        try {
+            nachrichtenList.clear();
+            int size = nachrichtenService.getNachrichten().getFeed().getNews().size();
+                for (int i = 0; i < size; i++) {
+                nachrichtenList.addElement(nachrichtenService.getNachrichten().getFeed().getNews().get(i).getTitel());
+            }
+                
+        } catch (JAXBException | FileNotFoundException ex) {
+            System.out.println("Fehler ");
+        }
+        return nachrichtenList;
+    }
+    public DefaultListModel refreshNachrichtenListWithName(List<String> serien){
+        try {
+            nachrichtenList.clear();
+            int size;
+            size = nachrichtenService.getNachrichten().getFeed().getNews().size();
+            for (int i = 0; i < size; i++) {
+               String currentSerie =  nachrichtenService.getNachrichten().getFeed().getNews().get(i).getSerienname();
+                 for (int j = 0; j < serien.size(); j++) {
+                    if(currentSerie.equals(serien.get(j))){
+                       nachrichtenList.addElement(nachrichtenService.getNachrichten().getFeed().getNews().get(i).getTitel());
+                    }
+                }
+            }
+      
+                   // nachrichtenList.addElement(serien);
+          
+        } catch (JAXBException | FileNotFoundException ex) {
+            System.out.println("Konnte Nachrichten nicht erhalten");
+        }
+    return nachrichtenList;
+    }
     public DefaultListModel refreshSubscibeList() {  // das gleich wie hier drüber nur mit subscribe list
         subscribeList.clear();
         for (int i = 0; i < getSerienListe().size(); i++) {
@@ -686,7 +745,22 @@ public class Xmpptest {
         @Override
         public void handlePublishedItems(ItemPublishEvent<Item> event) {
             System.out.println("Neues Item ist da!");   // hier muss noch was hin damit die items angezeigt werden
-
+            String xml =event.getItems().get(0).toString();
+            int x = xml.indexOf("\">");
+            int y = xml.indexOf("</");
+            int z = xml.indexOf("!!");
+            String nachricht = xml.substring(x+2,z);
+            String serien_Name = xml.substring(z+2,y);
+            News n = new News(); 
+            
+            n.setTitel(nachricht);
+            n.setSerienname(serien_Name);
+            try {
+                nachrichtenService.postNachricht(n);
+                nachrichtenListe.setModel(refreshNachrichtenList());
+            } catch (    JAXBException | FileNotFoundException ex) {
+                System.out.println("Gehler beim posten der Nachricht");
+            }   
         }
     }
 
@@ -740,7 +814,7 @@ public class Xmpptest {
         }
     }
     }
-
+    
     public void addEpisode(JList serienList, JTextField nummerTextField, JTextField nameTextField, JTextField staffelTextField, JTextArea beschreibungTextArea) {
         this.serienListe = serienList;
         this.nummerTextField = nummerTextField;
@@ -759,22 +833,123 @@ public class Xmpptest {
                 String staffelIndex = staffelTextField.getText();
                 String sName = serienListe.getSelectedValue().toString();
                 String episodenName = nameTextField.getText().toString();
-                System.out.println("Nummer: " + nummer + " Beschreibung: " + episodenBeschreibung);
-                System.out.println("Name:" + episodenName + " SerienName: " + sName + " index" + staffelIndex);
-                // serienService.getSerie(sName).getAlleStaffeln().getStaffel().get(staffelIndex).getEpisode().
+                if(!testIfStaffelExists(staffelIndex, sName)){
+                   staffelAdd(staffelIndex, sName);
+                }
+               
                 Episode e = new Episode();
                 e.setEpisodenbeschreibung(episodenBeschreibung);
                 e.setName(episodenName);
                 e.setNummer(nummer);
+                e.setId(episodenName);
                 try {
                     serienService.postEpisode(sName, staffelIndex, e);
                 } catch (JAXBException | FileNotFoundException ex) {
                     System.out.println("Fehler beim adden der Serie");
                 }
-
+                
             }
         }
     }
+    public boolean testIfStaffelExists(String staffel_id,String serien_Name){
+        boolean bool = false;
+        try {
+            int staffelSize = serienService.getStaffeln(serien_Name).getStaffel().size();
+            if (staffelSize==0){
+                System.out.println("Serie hat keine Staffeln");
+            }else{
+            for (int j = 0; j < staffelSize; j++) {
+               String currentName = serienService.getStaffeln(serien_Name).getStaffel().get(j).getId();
+               if(currentName.equals(staffel_id)){
+                   bool = true;
+               }
+            }
+        }
+        } catch (JAXBException | FileNotFoundException ex) {
+            System.out.println("Fehler beim testIfStaffelExists");
+        }
+        return bool;
+    }
+    public void staffelAdd(String staffel_Id,String serien_Name){
+    
+         Staffel st = new Staffel();
+         st.setId(staffel_Id);
+         
+        try {
+            serienService.postStaffel(serien_Name, st);
+        } catch (JAXBException | FileNotFoundException ex) {
+            System.out.println("Fehler beim erstellen der Staffel");
+        }
+    }
+    public void darstellerAdd(JTextField darstellerNameTextField, JTextField darstellerBildTextFeld,JTextArea darstellerBeschreibungTextArea,JList serienList){
+        this.darstellerBeschreibungTextArea = darstellerBeschreibungTextArea;
+        this.darstellerBildTextFeld = darstellerBildTextFeld;
+        this.darstellerNameTextField = darstellerNameTextField;
+        this.serienListe = serienList;
+        if(darstellerNameTextField.getText().isEmpty()|darstellerBildTextFeld.getText().isEmpty()|darstellerBeschreibungTextArea.getText().isEmpty()){
+            System.out.println("Bitte alle Benötigten Felder ausfüllen");
+        }   else{
+                if(serienListe.isSelectionEmpty()){
+                    System.out.println("Bitte Serie auswählen");
+                } else{
+            Darsteller d = new Darsteller();
+            String dBeschreibung = darstellerBeschreibungTextArea.getText().toString();
+            String dName = darstellerNameTextField.getText();
+            String dBild = darstellerBildTextFeld.getText();
+            String sName = serienListe.getSelectedValue().toString();
+            d.setBeschreibung(dBeschreibung);
+            d.setName(dName);
+                    try {
+                        
+                        serienService.postCastDarsteller(sName, d);
+                    } catch (            JAXBException | FileNotFoundException ex) {
+                        System.out.println("Fehler beim darsteller Post");
+                    }
+                   }
+        }
+    }
+    public void filterAdd(JTextField filterNameTextfield){
+        this.filterNameTextfield = filterNameTextfield;
+        String filterName;
+        if(filterNameTextfield.getText().isEmpty()){
+            System.out.println("Bitte einen Name eingeben");
+        }
+        else {
+           filterName = filterNameTextfield.getText();
+           Filter f = new Filter();
+            try {
+                profileService.postFilter(getUserIndex(),filterName,f);
+            } catch (    FileNotFoundException | JAXBException ex) {
+                System.out.println("Fehler beim erstellen des Filters");
+            }
+        }
+    }
+    public void addSerie(String serienNameAdd,String beschreibung){
+        try {
+            Serie s = new Serie();
+            AlleStaffeln a = new AlleStaffeln();       
+            s.setName(serienNameAdd);
+            s.setGenre("-kein Genre gewählt-");
+            s.setId(serienNameAdd);
+            s.setAlleStaffeln(a);
+            s.setBeschreibung(beschreibung);
+            serienService.postSerie(s);
+            Cast c = new Cast();
+            serienService.putCast(serienNameAdd, c);
+        } catch (JAXBException | FileNotFoundException ex) {
+            System.out.println("Fehler beim erstellen der Serie");
+        }
+    }
+       public void filter1Button(String filterName){
+        //   for (int i = 0; i <getAnzahlSerienImFilter(filterName); i++) {
+               try {
+                   List<String> serienNameList = profileService.getFilter(getUserIndex(), filterName).getSerie();
+                   refreshNachrichtenListWithName(serienNameList);
+               } catch (       JAXBException | FileNotFoundException ex) {
+                   System.out.println("Fehler");
+         //      }
+           }
+           }
     //ab hier alles zur Serien Info Seite
 
     public DefaultListModel refreshSerienList() {  // serienliste aktualisieren
@@ -820,7 +995,6 @@ public class Xmpptest {
             return "";
         } else {
             selectedEpisode = episodenListe.getSelectedValue().toString();
-            System.out.println(selectedEpisode);
             return selectedEpisode;
         }
     }
@@ -833,77 +1007,33 @@ public class Xmpptest {
                 return serienService.getSerie(selectedSerie).getBeschreibung();
             } catch (JAXBException | FileNotFoundException ex) {
                 System.out.println("Fehler");
+                 return "Fehler";
             }
         }
-        return "-Keine Beschreibung-2";
     }
 
-    public String getEpisodenBeschreibung(String selectedSerie, JList episodenListe) {
+    public String getEpisodenBeschreibung(String selectedSerie, JList episodenListe,String serien_Name) {
         this.episodenListe = episodenListe;
         if ("".equals(selectedSerie)) {
-            return "-Keine Beschreibung-";
-        } else {
-
-
-            String selectedEpisode = selectedEpisode(episodenListe);
+           return "-Keine Beschreibung-";
+        } 
+        else {
+            String selectedEpisode = selectedEpisode(episodenListe).substring(5); // weil die Liste in der form nummer+id ist
             if ("".equals(selectedEpisode)) {
-                System.out.println("jo" + selectedEpisode);
                 return "-Keine Beschreibung-3";
             } else {
-                try {
-                    int indexEpisode = indexOfSelectedEpisode(selectedEpisode, selectedSerie);
-                    int indexStaffel = indexOfSelectedEpisode(selectedEpisode, selectedSerie);
-
-                    if (indexEpisode == -1 | indexStaffel == -1) {
-                        System.out.println("fehler");
-                        return "-keine Beschreibung-";
-                    } else {
-                        return serienService.getSerie(selectedSerie).getAlleStaffeln().getStaffel().get(indexStaffel).getEpisode().get(indexEpisode).getEpisodenbeschreibung();
-                    }
+               try {
+                     String staffel_id = selectedEpisode(episodenListe).substring(0,1);
+                        return serienService.getEpisode(serien_Name,staffel_id, selectedEpisode).getEpisodenbeschreibung();
                 } catch (JAXBException | FileNotFoundException ex) {
                     System.out.println("Fehler");
                 }
-
-
             }
         }
-        return "-Keine Beschreibung-2";
+        return "-Keine Beschreibung-";    
     }
 
-    public int indexOfSelectedEpisode(String selectedEpisode, String selectedSerie) {
-        int x = -1;
-        for (int i = 0; i < getEpisodenList(selectedSerie).size(); i++) {
-            for (int j = 0; j < getStaffelList(selectedSerie).size(); j++) {
-                try {
-                    if (selectedEpisode.equals(serienService.getSerie(serienName).getAlleStaffeln().getStaffel().get(j).getEpisode().get(i).getName())) {
-                        System.out.println(selectedEpisode);
-                        System.out.println(serienService.getSerie(serienName).getAlleStaffeln().getStaffel().get(j).getEpisode().get(i).getName());
-                        x = i;
-                    }
-                } catch (JAXBException | FileNotFoundException ex) {
-                    System.out.println("Fehler");
-                }
 
-            }
-        }
-        return x;
-    }
-
-    public int indexOfSelectedStaffel(String selectedStaffel, String selectedSerie) {
-        int x = -1;
-
-        for (int j = 0; j < getStaffelList(selectedSerie).size(); j++) {
-            try {
-                if (selectedStaffel.equals(serienService.getSerie(serienName).getAlleStaffeln().getStaffel().get(j).getId())) {
-                    x = j;
-                }
-            } catch (JAXBException | FileNotFoundException ex) {
-                System.out.println("Fehler");
-            }
-
-        }
-        return x;
-    }
 
     public int indexOfSelectedDarsteler(String selectedDarsteller, String selectedSerie) {
         int j = -1;
@@ -932,21 +1062,7 @@ public class Xmpptest {
         }
     }
 
-    public String getBildUrl(String selectedDarsteller, String selectedSerie) {
-        try {
-            String bildUrl;
-            int indexOfDarsteller = indexOfSelectedDarsteler(selectedDarsteller, selectedSerie);
-            if (indexOfDarsteller == -1) {
-                return "-keine Url-";
-            } else {
-                bildUrl = serienService.getCast(selectedSerie).getDarsteller().get(indexOfDarsteller).getBild().getUrl();
-                return bildUrl;
-            }
-        } catch (JAXBException | FileNotFoundException ex) {
-            System.out.println("Fehler");
-            return "-keine Url-";
-        }
-    }
+   
 
     public List<Episode> getEpisodenList(String selectedSerie) {
         List<Episode> episoden1;
@@ -955,9 +1071,21 @@ public class Xmpptest {
             return episoden;
         } else {
             try {
-                episoden1 = serienService.getStaffeln(selectedSerie).getStaffel().get(0).getEpisode();
-                episoden = serienService.getStaffeln(selectedSerie).getStaffel().get(1).getEpisode();
-                episoden.addAll(episoden1);
+               int size = serienService.getStaffeln(selectedSerie).getStaffel().size();
+                
+                for (int i = 0; i < size; i++) {
+                    if(i==0){
+                    episoden = serienService.getStaffeln(selectedSerie).getStaffel().get(i).getEpisode();
+                    }
+                    else{
+                    episoden1 = serienService.getStaffeln(selectedSerie).getStaffel().get(i).getEpisode();
+                    episoden.addAll(episoden1);
+                    }
+                    
+                }
+             //   episoden1 = serienService.getStaffeln(selectedSerie).getStaffel().get(0).getEpisode();
+             //   episoden = serienService.getStaffeln(selectedSerie).getStaffel().get(1).getEpisode();
+             //   episoden.addAll(episoden1);
             } catch (JAXBException | FileNotFoundException ex) {
                 System.out.println("Fehler");
             }
@@ -969,9 +1097,10 @@ public class Xmpptest {
         List<Darsteller> dars = null;
         if ("".equals(selectedSerie)) {
             return dars;
+            
         } else {
             try {
-
+             
                 dars = serienService.getSerie(selectedSerie).getCast().getDarsteller();
             } catch (JAXBException | FileNotFoundException ex) {
                 System.out.println("Konnte Darsteller nicht erhalten");
@@ -992,9 +1121,12 @@ public class Xmpptest {
                 System.out.println("Konnte Staffel nicht erhalten");
             }
         }
+        
         return staffel;
     }
-
+    public void gibNachrichtenListe(JList nachrichtenListe){
+        this.nachrichtenListe = nachrichtenListe;
+    }
     public DefaultListModel refreshEpisodenList() {
         episodenList.clear();
         String selectedSerie = selectedSerie(serienListe);

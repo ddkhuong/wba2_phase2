@@ -21,8 +21,8 @@ public class Filter extends javax.swing.JFrame {
      * Creates new form Filter
      */
     private Hauptmenue haupt;
-    private Xmpptest xmpp;
-    public Filter(Hauptmenue haupt, Xmpptest xmpp){
+    private XMPPController xmpp;
+    public Filter(Hauptmenue haupt, XMPPController xmpp){
         this.xmpp = xmpp;
         this.haupt = haupt;
         initComponents();
@@ -47,7 +47,7 @@ public class Filter extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         filterList = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        filterNameTextfield = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         serienInFilterList = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
@@ -60,6 +60,7 @@ public class Filter extends javax.swing.JFrame {
         filterToMainButton = new javax.swing.JButton();
         serieEntfernenButton = new javax.swing.JButton();
         aktualisierenButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,8 +74,6 @@ public class Filter extends javax.swing.JFrame {
         jScrollPane1.setViewportView(filterList);
 
         jLabel2.setText("Vorhandene Filter");
-
-        jTextField1.setText("Filter Name");
 
         serienInFilterList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -108,7 +107,12 @@ public class Filter extends javax.swing.JFrame {
 
         jLabel4.setText("Weitere Serien Hinzufügen");
 
-        filterSaveButton.setText("Speichern");
+        filterSaveButton.setText("Neuer Filter");
+        filterSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterSaveButtonActionPerformed(evt);
+            }
+        });
 
         filterToMainButton.setText("Hauptmenü");
         filterToMainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +135,8 @@ public class Filter extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Filter Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +153,7 @@ public class Filter extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,21 +161,23 @@ public class Filter extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(serieEntfernenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(filterAddButton))))
+                                .addGap(116, 116, 116)
+                                .addComponent(filterAddButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filterToMainButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(filterSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(filterNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(filterSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,7 +206,8 @@ public class Filter extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filterSaveButton)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filterNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -227,7 +236,13 @@ public class Filter extends javax.swing.JFrame {
 
     private void filterAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterAddButtonActionPerformed
        xmpp.addSerieToFilter(availableSerieList);
+       xmpp.refreshSerienInFilterList(filterList);
     }//GEN-LAST:event_filterAddButtonActionPerformed
+
+    private void filterSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterSaveButtonActionPerformed
+        xmpp.filterAdd(filterNameTextfield);
+        xmpp.refreshFilterList();
+    }//GEN-LAST:event_filterSaveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -236,16 +251,17 @@ public class Filter extends javax.swing.JFrame {
     private javax.swing.JButton filterAddButton;
     private javax.swing.JButton filterDeleteButton;
     private javax.swing.JList filterList;
+    private javax.swing.JTextField filterNameTextfield;
     private javax.swing.JButton filterSaveButton;
     private javax.swing.JButton filterToMainButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton serieEntfernenButton;
     private javax.swing.JList serienInFilterList;
     // End of variables declaration//GEN-END:variables

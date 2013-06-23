@@ -18,8 +18,9 @@ public class SerieInfo extends javax.swing.JFrame {
      * Creates new form SerieInfo
      */
     private Hauptmenue haupt;
-    private Xmpptest xmpp;
-    public SerieInfo(Hauptmenue haupt,Xmpptest xmpp) {
+    private XMPPController xmpp;
+    private String Serien_name;
+    public SerieInfo(Hauptmenue haupt,XMPPController xmpp) {
         this.haupt = haupt;
         this.xmpp = xmpp;
         initComponents();
@@ -57,12 +58,9 @@ public class SerieInfo extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         darstellerBeschreibungTextarea = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         aktualisierenButton = new javax.swing.JButton();
         darstellerAktualisierenButton = new javax.swing.JButton();
         episodenAktuaisierenButton = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        bildUrlTextarea = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
 
         jTextArea3.setColumns(20);
@@ -89,7 +87,6 @@ public class SerieInfo extends javax.swing.JFrame {
         serienBeschreibungTextarea.setColumns(20);
         serienBeschreibungTextarea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         serienBeschreibungTextarea.setRows(5);
-        serienBeschreibungTextarea.setText("Lorem Ipsum, Lorem Ipsum, Lorem Ipsum\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum");
         serienBeschreibungTextarea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         serienBeschreibungTextarea.setEnabled(false);
         jScrollPane2.setViewportView(serienBeschreibungTextarea);
@@ -97,7 +94,6 @@ public class SerieInfo extends javax.swing.JFrame {
         episodenBeschreibungTextarea.setColumns(20);
         episodenBeschreibungTextarea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         episodenBeschreibungTextarea.setRows(5);
-        episodenBeschreibungTextarea.setText("Bla Bla Bla Lorem IpsumLore\nLorem IpsumLorem IpsumLorem Ipsum\nLorem IpsumLorem IpsumLorem Ipsum");
         episodenBeschreibungTextarea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         episodenBeschreibungTextarea.setEnabled(false);
         jScrollPane3.setViewportView(episodenBeschreibungTextarea);
@@ -116,14 +112,11 @@ public class SerieInfo extends javax.swing.JFrame {
         darstellerBeschreibungTextarea.setColumns(20);
         darstellerBeschreibungTextarea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         darstellerBeschreibungTextarea.setRows(5);
-        darstellerBeschreibungTextarea.setText("Super Darsteller");
         darstellerBeschreibungTextarea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         darstellerBeschreibungTextarea.setEnabled(false);
         jScrollPane8.setViewportView(darstellerBeschreibungTextarea);
 
         jLabel6.setText("Darsteller Beschreibung");
-
-        jLabel7.setText("Bild URL");
 
         aktualisierenButton.setText("Serien Aktualisieren");
         aktualisierenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,14 +138,6 @@ public class SerieInfo extends javax.swing.JFrame {
                 episodenAktuaisierenButtonActionPerformed(evt);
             }
         });
-
-        bildUrlTextarea.setColumns(20);
-        bildUrlTextarea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        bildUrlTextarea.setRows(1);
-        bildUrlTextarea.setText("bild");
-        bildUrlTextarea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        bildUrlTextarea.setEnabled(false);
-        jScrollPane6.setViewportView(bildUrlTextarea);
 
         jLabel4.setText("Episodenliste");
 
@@ -195,13 +180,9 @@ public class SerieInfo extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(serieInfoToMainButton))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(193, 193, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane8)
-                                    .addComponent(jScrollPane6)))))
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(aktualisierenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -229,13 +210,8 @@ public class SerieInfo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane7)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                            .addComponent(jScrollPane8))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -263,30 +239,27 @@ public class SerieInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_serieInfoToMainButtonActionPerformed
 
     private void aktualisierenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktualisierenButtonActionPerformed
-       String name = xmpp.selectedSerie(serienList);
-        serienBeschreibungTextarea.setText(xmpp.getSerienBeschreibung(name));
+        Serien_name = xmpp.selectedSerie(serienList);
+        serienBeschreibungTextarea.setText(xmpp.getSerienBeschreibung(Serien_name));
         darstellerList.setModel(xmpp.refreshDarstellerList());
         episodenList.setModel(xmpp.refreshEpisodenList());
-        //xmpp.selectedSerie();
+      
     }//GEN-LAST:event_aktualisierenButtonActionPerformed
 
     private void darstellerAktualisierenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darstellerAktualisierenButtonActionPerformed
        String selectedDarsteller = xmpp.selectedDarsteller(darstellerList);
        String selectedSerie = xmpp.selectedSerie(serienList);
         darstellerBeschreibungTextarea.setText(xmpp.getDarstellerBeschreibung(selectedDarsteller,selectedSerie));
-        bildUrlTextarea.setText(xmpp.getBildUrl(selectedDarsteller, selectedSerie));
+
     }//GEN-LAST:event_darstellerAktualisierenButtonActionPerformed
 
     private void episodenAktuaisierenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_episodenAktuaisierenButtonActionPerformed
         String selectedSerie = xmpp.selectedSerie(serienList);
-        
-        System.out.println(xmpp.selectedEpisode(episodenList));
-        episodenBeschreibungTextarea.setText(xmpp.getEpisodenBeschreibung(selectedSerie,episodenList));
+        episodenBeschreibungTextarea.setText(xmpp.getEpisodenBeschreibung(selectedSerie,episodenList,Serien_name));
     }//GEN-LAST:event_episodenAktuaisierenButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aktualisierenButton;
-    private javax.swing.JTextArea bildUrlTextarea;
     private javax.swing.JButton darstellerAktualisierenButton;
     private javax.swing.JTextArea darstellerBeschreibungTextarea;
     private javax.swing.JList darstellerList;
@@ -299,13 +272,11 @@ public class SerieInfo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextArea jTextArea3;

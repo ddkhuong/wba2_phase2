@@ -55,7 +55,7 @@ public class ProfileService {
 	}
 
 	/**
-	 * Marshalt die veränderte XML-Datei "ProfilXML.xml".
+	 * Marshalt die verï¿½nderte XML-Datei "ProfilXML.xml".
 	 * 
 	 * @param p Ein Objekt der Klasse Profile
 	 * @throws JAXBException
@@ -74,10 +74,10 @@ public class ProfileService {
 	}
 
 	/**
-	 * Nimmt die ID des letzten Objekts "Profil" in der Liste und erhöht diese um
+	 * Nimmt die ID des letzten Objekts "Profil" in der Liste und erhï¿½ht diese um
 	 * eins.
 	 * 
-	 * @return gibt die um eins erhöhte ID zurück
+	 * @return gibt die um eins erhï¿½hte ID zurï¿½ck
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
 	 */
@@ -97,7 +97,7 @@ public class ProfileService {
 	}
 
 	/**
-	 * Gibt eine Liste aller vorhandenen Profile zurück.
+	 * Gibt eine Liste aller vorhandenen Profile zurï¿½ck.
 	 * 
 	 * 
 	 * @return eine Liste aller Profil-Objekte
@@ -115,7 +115,7 @@ public class ProfileService {
 	}
 
 	/**
-	 * Gibt ein bestimmtes Profil mit der ID "profil_id" zurück
+	 * Gibt ein bestimmtes Profil mit der ID "profil_id" zurï¿½ck
 	 * 
 	 * @param profil_id ID des angeforderten Objekts
 	 * @return angefordertes Profil
@@ -141,10 +141,10 @@ public class ProfileService {
 	}
 
 	/**
-	 * Erstellt ein neues Profil und fügt diese zur vorhandenen Liste hinzu, die
-	 * ID ist dabei die des letzten Objekts in der Liste um eins erhöht.
+	 * Erstellt ein neues Profil und fï¿½gt diese zur vorhandenen Liste hinzu, die
+	 * ID ist dabei die des letzten Objekts in der Liste um eins erhï¿½ht.
 	 * 
-	 * Das Objekt p muss in der XML-Struktur des Profils übergeben werden.
+	 * Das Objekt p muss in der XML-Struktur des Profils ï¿½bergeben werden.
 	 * 
 	 * @param p Profil-Objekt in XMl-Struktur
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
@@ -169,7 +169,7 @@ public class ProfileService {
 	}
 
 	/**
-	 * Verändert ein bereits vohandenes Profil oder fügt eins hinzu, wenn es
+	 * Verï¿½ndert ein bereits vohandenes Profil oder fï¿½gt eins hinzu, wenn es
 	 * noch nicht vorhanden ist
 	 * 
 	 * @param profil_id
@@ -210,9 +210,9 @@ public class ProfileService {
 	}
 
 	/**
-	 * Löscht das Profil mit der übergebenen ID.
+	 * Lï¿½scht das Profil mit der ï¿½bergebenen ID.
 	 * 
-	 * @param profil_id ID des zu löschenden Profils
+	 * @param profil_id ID des zu lï¿½schenden Profils
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -230,7 +230,7 @@ public class ProfileService {
 				
 				profil_daten.getProfil().remove(i);
 				marshalProfil(profil_daten);
-				System.out.println("Profil wurde gelöscht");
+				System.out.println("Profil wurde gelï¿½scht");
 				return Response.ok().build();
 			}
 		}
@@ -239,7 +239,7 @@ public class ProfileService {
 	}
 
 	/**
-	 * Gibt eine Liste alle Filterobjekte zurück.
+	 * Gibt eine Liste alle Filterobjekte zurï¿½ck.
 	 * 
 	 * @param profil_id ID des Profils, dem die Filter zugeordnet sind
 	 * @return Liste der Filter-Objekte
@@ -287,10 +287,10 @@ public class ProfileService {
 	}
 
 	/**
-	 * Erstellt einen neuen Filter und fügt diese zur vorhandenen Liste hinzu, die
-	 * ID ist dabei die des letzten Objekts in der Liste um eins erhöht.
+	 * Erstellt einen neuen Filter und fï¿½gt diese zur vorhandenen Liste hinzu, die
+	 * ID ist dabei die des letzten Objekts in der Liste um eins erhï¿½ht.
 	 * 
-	 * Das Objekt f muss in der XML-Struktur der Filter übergeben werden.
+	 * Das Objekt f muss in der XML-Struktur der Filter ï¿½bergeben werden.
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet werden soll
 	 * @param f Filter-Objekt in XML-Struktur
@@ -320,10 +320,10 @@ public class ProfileService {
 	}
 
 	/**
-	 * Löscht den Filter mit der übergebenen ID "filter_id".
+	 * Lï¿½scht den Filter mit der ï¿½bergebenen ID "filter_id".
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
-	 * @param filtername Name des zu löschenden Filter-Objekts
+	 * @param filtername Name des zu lï¿½schenden Filter-Objekts
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -347,7 +347,7 @@ public class ProfileService {
 				
 				profil_daten.getProfil().get(p_id).getFiltercontainer().getFilter().remove(i);
 				marshalProfil(profil_daten);
-				System.out.println("Filter wurde gelöscht");
+				System.out.println("Filter wurde gelï¿½scht");
 				return Response.ok().build();
 			}
 		}
@@ -357,11 +357,11 @@ public class ProfileService {
 
 	
 	/**
-	 * Fügt eine Serie dem Filter hinzu
+	 * Fï¿½gt eine Serie dem Filter hinzu
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
-	 * @param filtername Name des Filters, dem die Serie hinzugefügt werden soll 
-	 * @param serienname Serie die hinzugefügt werden soll
+	 * @param filtername Name des Filters, dem die Serie hinzugefï¿½gt werden soll 
+	 * @param serienname Serie die hinzugefï¿½gt werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -397,12 +397,12 @@ public class ProfileService {
 	}
 	
 	/**
-	 * Löscht eine bestimmte Serie aus dem Filter
+	 * Lï¿½scht eine bestimmte Serie aus dem Filter
 	 * 
 	 * 
 	 * @param profil_id ID des Profils, dem der Filter zugeordnet ist
 	 * @param filter_id ID des Filters dem die Serie zugeordnet ist
-	 * @param serienname Name der Serie, die gelöscht werden soll
+	 * @param serienname Name der Serie, die gelï¿½scht werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -440,7 +440,7 @@ public class ProfileService {
 					
 					
 			marshalProfil(profil_daten);
-			System.out.println("Serie wurde aus Filter gelöscht");
+			System.out.println("Serie wurde aus Filter gelï¿½scht");
 			return Response.ok().build();
 					}
 				}
@@ -455,7 +455,7 @@ public class ProfileService {
 	
 	
 	/**
-	 * Gibt eine Liste aller Abo-Objekte, die abonnierten Serien, zurück.
+	 * Gibt eine Liste aller Abo-Objekte, die abonnierten Serien, zurï¿½ck.
 	 * 
 	 * @param profil_id ID des Profils, dem die das Abo zugeordnet ist.
 	 * @return Liste aller abonnierten Serien
@@ -475,11 +475,11 @@ public class ProfileService {
 	}
 
 	/**
-	 * Erstellt ein neues Serien-Objekt, das der Liste der Serien im Abo hizugefügt wird.
+	 * Erstellt ein neues Serien-Objekt, das der Liste der Serien im Abo hizugefï¿½gt wird.
 	 * 
 	 * 
 	 * @param profil_id ID des Profils, dem das Abo zu geordnet ist
-	 * @param serie die Serie, die neu zu der Liste Serien im Abonnement hinzugefügt werden soll
+	 * @param serie die Serie, die neu zu der Liste Serien im Abonnement hinzugefï¿½gt werden soll
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -504,10 +504,10 @@ public class ProfileService {
 	}
 
 	/**
-	 * Löscht die Serie mit dem übergebenen Namen.
+	 * Lï¿½scht die Serie mit dem ï¿½bergebenen Namen.
 	 * 
 	 * @param profil_id ID des Profil, dem das Abo zugeordnet ist
-	 * @param serie die zu löschende Serie
+	 * @param serie die zu lï¿½schende Serie
 	 * @return Status-Code ok bei Erfolg, wenn nicht dann Code 404 als Fehler
 	 * @throws JAXBException
 	 * @throws FileNotFoundException
@@ -524,8 +524,7 @@ public class ProfileService {
 		Profile profil_daten = unmarshalProfil();
 		Serien s_list = getAbonnierteSerien(profil_id);
 		
-		//Vermeidung von IndexOutOfBoundsException
-	
+		//Vermeidung von IndexOutOfBoundsException	
 		int p_id = (Integer.parseInt(profil_id) - 1);
 
 		for(int i=0; i<s_list.getSerie().size(); i++){
@@ -533,7 +532,7 @@ public class ProfileService {
 			profil_daten.getProfil().get(p_id).getAbos().getSerien().getSerie().remove(i);
 
 			marshalProfil(profil_daten);
-			System.out.println("Abonnierte Serie wurde gelöscht");
+			System.out.println("Abonnierte Serie wurde gelï¿½scht");
 			return Response.ok().build();
 		}	
 		
